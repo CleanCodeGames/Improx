@@ -5,37 +5,37 @@ const size_t NumFilesInFolder(const char* path)
     return std::distance(std::filesystem::directory_iterator(path), std::filesystem::directory_iterator{});
 }
 
-sf::Texture* Texture::get(const std::string& name)
+sf::Texture* Texture::Get(const std::string& name)
 {
     const auto& it = find(name);
     return it != end() ? it->second.get() : nullptr;
 }
 
-sf::Font* Font::get(const std::string& name)
+sf::Font* Font::Get(const std::string& name)
 {
     const auto& it = find(name);
     return it != end() ? it->second.get() : nullptr;
 }
 
-sf::Sound* Sound::getSound(const std::string& name)
+sf::Sound* Sound::GetSound(const std::string& name)
 {
     const auto& it = find(name); 
     return it != end() ? &it->second.second : nullptr;
 }
 
-sf::SoundBuffer* Sound::getBuffer(const std::string& name)
+sf::SoundBuffer* Sound::GetBuffer(const std::string& name)
 {
     const auto& it = find(name); 
     return it != end() ? &it->second.first : nullptr;
 }
 
-sf::Music* Music::get(const std::string& name)
+sf::Music* Music::Get(const std::string& name)
 {
    const auto& it = find(name); 
    return it != end() ? it->second.get() : nullptr;
 }
 
-sf::Shader* Shader::get(const std::string& name)
+sf::Shader* Shader::Get(const std::string& name)
 {
     const auto& it = find(name); 
     return it != end() ? it->second.get() : nullptr;
@@ -43,9 +43,9 @@ sf::Shader* Shader::get(const std::string& name)
 
 Resources::Resources()
 {
-    auto Paths = serchPaths();
+    auto Paths = SerchPaths();
     for (size_t i = 0; i < Paths.size(); ++i)
-        addFile(Paths[i]);
+        AddFile(Paths[i]);
 
     texture.rehash(texture.size());
     font.rehash(font.size());
@@ -54,13 +54,13 @@ Resources::Resources()
     shader.rehash(shader.size());
 }
 
-std::vector<std::filesystem::path> Resources::serchPaths()
+std::vector<std::filesystem::path> Resources::SerchPaths()
 {
-    std::vector<std::filesystem::path> paths = scanDirectory((std::filesystem::current_path() / "resources").string());
+    std::vector<std::filesystem::path> paths = ScanDirectory((std::filesystem::current_path() / "resources").string());
     return paths;
 }
 
-std::vector<std::filesystem::path> Resources::scanDirectory(const std::string& pathDir)
+std::vector<std::filesystem::path> Resources::ScanDirectory(const std::string& pathDir)
 {
     std::vector<std::filesystem::path> filesA;
     std::vector vec_extensions{ ".png", ".jpg", ".jpeg", ".wav", ".ogg", ".ttf", ".otf", ".vert", ".frag" };
@@ -68,7 +68,7 @@ std::vector<std::filesystem::path> Resources::scanDirectory(const std::string& p
     {
         if (it->is_directory())
         {
-            std::vector<std::filesystem::path> filesB = scanDirectory(it->path().string());
+            std::vector<std::filesystem::path> filesB = ScanDirectory(it->path().string());
             filesA.insert(end(filesA), std::begin(filesB), std::end(filesB));
         }
         for (auto& exp : vec_extensions)
@@ -78,7 +78,7 @@ std::vector<std::filesystem::path> Resources::scanDirectory(const std::string& p
     return filesA;
 }
 
-void Resources::addFile(std::filesystem::path path)
+void Resources::AddFile(std::filesystem::path path)
 {
     std::string name, type;
 

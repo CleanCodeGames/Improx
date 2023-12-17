@@ -24,7 +24,7 @@ void System::Initialization()
 	clock		= std::make_unique<sf::Clock>();
 	camera		= std::make_unique<sf::View>();
 
-	camera->setSize(resolution.x, resolution.y);
+	camera->setSize(static_cast<float>(resolution.x), static_cast<float>(resolution.y));
 	camera->setCenter(0, 0);
 	window->setView(*camera);
 	time_elapsed = 0.f;

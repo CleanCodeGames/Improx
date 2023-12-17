@@ -7,7 +7,7 @@ class Texture : private std::unordered_map<std::string, std::unique_ptr<sf::Text
 
 public:
 
-    sf::Texture* get(const std::string& name);
+    sf::Texture* Get(const std::string& name);
 };
 
 class Font : private std::unordered_map<std::string, std::unique_ptr<sf::Font>>
@@ -16,7 +16,7 @@ class Font : private std::unordered_map<std::string, std::unique_ptr<sf::Font>>
 
 public:
 
-    sf::Font* get(const std::string& name);
+    sf::Font* Get(const std::string& name);
 };
 
 class Sound : private std::unordered_map<std::string, std::pair<sf::SoundBuffer, sf::Sound>>
@@ -25,8 +25,8 @@ class Sound : private std::unordered_map<std::string, std::pair<sf::SoundBuffer,
 
 public:
 
-    sf::SoundBuffer* getBuffer(const std::string& name);
-    sf::Sound* getSound(const std::string& name);
+    sf::SoundBuffer* GetBuffer(const std::string& name);
+    sf::Sound* GetSound(const std::string& name);
 };
 
 class Music : private std::unordered_map<std::string, std::unique_ptr<sf::Music>>
@@ -35,7 +35,7 @@ class Music : private std::unordered_map<std::string, std::unique_ptr<sf::Music>
 
 public:
 
-    sf::Music* get(const std::string& name);
+    sf::Music* Get(const std::string& name);
 };
 
 class Audio
@@ -53,7 +53,7 @@ class Shader : private std::unordered_map<std::string, std::unique_ptr<sf::Shade
 
 public:
 
-    sf::Shader* get(const std::string& name);
+    sf::Shader* Get(const std::string& name);
 
 };
 
@@ -61,9 +61,9 @@ class Resources
 {
 private:
 
-    std::vector<std::filesystem::path> serchPaths();
-    std::vector<std::filesystem::path> scanDirectory(const std::string& pathDir);
-    void addFile(std::filesystem::path path);
+    std::vector<std::filesystem::path> SerchPaths();
+    std::vector<std::filesystem::path> ScanDirectory(const std::string& pathDir);
+    void AddFile(std::filesystem::path path);
 
 public:
 

@@ -23,9 +23,9 @@ public:
 	~System() = delete;
 };
 
-#define TEXTURE(file_name) System::resources->texture.get(file_name)
-#define SOUND(file_name) System::resources->audio.sound.getSound(file_name)
-#define SOUND_BUFFER(file_name) System::resources->audio.sound.getBuffer(file_name)
-#define MUSIC(file_name) System::resources->audio.music.get(file_name)
-#define FONT(file_name) System::resources->font.get(file_name)
-#define SHADER(file_name) System::resources->shader.get(file_name)
+#define TEXTURE(file_name) System::resources->texture.Get(file_name)
+#define SOUND(file_name) System::resources->audio.sound.GetSound(file_name)
+#define SOUND_BUFFER(file_name) System::resources->audio.sound.GetBuffer(file_name)
+#define MUSIC(file_name) System::resources->audio.music.Get(file_name)
+#define FONT(file_name) System::resources->font.Get(file_name)
+#define SHADER(file_name) System::resources->shader.Get(file_name)

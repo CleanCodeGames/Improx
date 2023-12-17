@@ -137,8 +137,8 @@
     <ClCompile Include="Engine\System\Geometry\Geometry.cpp" />
     <ClCompile Include="Engine\System\Input\Input.cpp" />
     <ClCompile Include="Engine\System\System.cpp" />
-    <ClCompile Include="Gameplay\World\WeatherSettings\WorldSettings.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Gameplay\Player\Player.cpp" />
+    <ClCompile Include="Gameplay\Suspect\Suspect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\System\Resources\Resources.h" />
@@ -149,8 +149,8 @@
     <ClInclude Include="Gameplay\Game.h" />
     <ClInclude Include="Gameplay\Levels\ILevel.h" />
     <ClInclude Include="Gameplay\World\Settings\WorldSettings.h" />
-    <ClInclude Include="Gameplay\World\WeatherSettings\WorldSettings.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Gameplay\Player\Player.h" />
+    <ClInclude Include="Gameplay\Suspect\Suspect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
