@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="Gameplay\Game.cpp" />
     <ClCompile Include="Gameplay\Levels\ILevel.cpp" />
+    <ClCompile Include="Gameplay\World\Settings\WorldSettings.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine\System\Resources\Resources.cpp" />
     <ClCompile Include="Engine\System\Geometry\Geometry.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Engine\System\System.h" />
     <ClInclude Include="Gameplay\Game.h" />
     <ClInclude Include="Gameplay\Levels\ILevel.h" />
+    <ClInclude Include="Gameplay\World\Settings\WorldSettings.h" />
     <ClInclude Include="Gameplay\World\WeatherSettings\WorldSettings.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
