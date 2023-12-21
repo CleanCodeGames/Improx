@@ -10,6 +10,7 @@ public:
 	static std::unique_ptr<sf::Clock> clock;
 	static std::unique_ptr<sf::View> camera;
 	static std::unique_ptr<Resources> resources;
+
 	static sf::Vector2i resolution;
 	static sf::Vector2f camera_position;
 	static sf::Vector2f cursor_world;
