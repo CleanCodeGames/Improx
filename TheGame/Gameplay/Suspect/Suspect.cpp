@@ -1,5 +1,5 @@
 #include "Suspect.h"
-#define COMPONENT(index, name) std::get<index>(*GetBodyPart(name))
+#define BODY_PART(index, name) std::get<index>(*GetBodyPart(name))
 
 enum PartIndex
 {
@@ -23,29 +23,36 @@ void Suspect::BuildBody()
 		}
 	);
 
-	AddBodyPart("corpus"); // Туловище
+	/* Туловище */
+	AddBodyPart("corpus");
 	const auto& size_corpus = sf::Vector2f(256.f, 256.f * 1.5f);
 	const auto& position_corpus = System::camera_position;
-	BuildPart(COMPONENT(SHAPE, "corpus"), position_corpus, size_corpus, size_corpus / 2.f, sf::Color::Green);
+	BuildPart(BODY_PART(SHAPE, "corpus"), position_corpus, size_corpus, size_corpus / 2.f, sf::Color::Green);
 
-	AddBodyPart("head"); // Голова
+	/* Голова */
+	AddBodyPart("head");
 	const auto& size_head = sf::Vector2f(96.f, 128.f);
-	const auto& position_head = Geometry::Normalized(position_corpus, size_corpus.y / 2.0f + size_head.y / 2.2f, COMPONENT(SHAPE, "corpus").getRotation() - 90);
-	BuildPart(COMPONENT(SHAPE, "head"), position_head, size_head, size_head / 2.f, sf::Color::Yellow);
-	
-	AddBodyPart("hair"); // Волосы (скальп)
+	const auto& rotation_corpus = BODY_PART(SHAPE, "corpus").getRotation();
+	const auto& position_head = Geometry::Normalized(position_corpus, size_corpus.y / 2.0f + size_head.y / 2.2f, rotation_corpus - 90);
+	BuildPart(BODY_PART(SHAPE, "head"), position_head, size_head, size_head / 2.f, sf::Color::Yellow);
+
+	/* Волосы (скальп) */
+	AddBodyPart("hair");
 	const auto& size_hair = sf::Vector2f(128, 32);
-	const auto& position_hair = Geometry::Normalized(position_head, size_head.y / 2.0f + size_hair.y / 2.2f, COMPONENT(SHAPE, "head").getRotation() - 90);
-	BuildPart(COMPONENT(SHAPE, "hair"), position_hair, size_hair, size_hair / 2.f, sf::Color::Cyan);
+	const auto& rotation_head = BODY_PART(SHAPE, "head").getRotation();
+	const auto& position_hair = Geometry::Normalized(position_head, size_head.y / 2.0f + size_hair.y / 2.2f, rotation_head - 90);
+	BuildPart(BODY_PART(SHAPE, "hair"), position_hair, size_hair, size_hair / 2.f, sf::Color::Cyan);
 
-	AddBodyPart("left_eye"); // Левый  глаз
+	/* Левый глаз */
+	AddBodyPart("left_eye");
 	const auto& size_eye = sf::Vector2f(16.f, 16.f);
-	const auto& position_left_eye = Geometry::Normalized(position_head, size_head.y / 4.f + size_eye.x / 2.f, COMPONENT(SHAPE, "head").getRotation() - 115);
-	BuildPart(COMPONENT(SHAPE, "left_eye"), position_left_eye, size_eye, size_eye / 2.f, sf::Color::Black);
+	const auto& position_left_eye = Geometry::Normalized(position_head, size_head.y / 4.f + size_eye.x / 2.f, rotation_head - 115);
+	BuildPart(BODY_PART(SHAPE, "left_eye"), position_left_eye, size_eye, size_eye / 2.f, sf::Color::Black);
 
-	AddBodyPart("right_eye"); // Правый глаз
-	const auto& position_right_eye = Geometry::Normalized(position_head, size_head.y / 4.f + size_eye.x / 2.f, COMPONENT(SHAPE, "head").getRotation() - 65);
-	BuildPart(COMPONENT(SHAPE, "right_eye"), position_right_eye, size_eye, size_eye / 2.f, sf::Color::Black);
+	/* Правый глаз */
+	AddBodyPart("right_eye");
+	const auto& position_right_eye = Geometry::Normalized(position_head, size_head.y / 4.f + size_eye.x / 2.f, rotation_head - 65);
+	BuildPart(BODY_PART(SHAPE, "right_eye"), position_right_eye, size_eye, size_eye / 2.f, sf::Color::Black);
 
 	AddBodyPart("left_hand_arm");				// Левое  плечо
 	AddBodyPart("right_hand_arm");				// Правое пплечо
@@ -86,7 +93,7 @@ void Suspect::BuildBody()
 void Suspect::Draw()
 {
 	for (auto& part : m_body)
-		System::window->draw(COMPONENT(SHAPE, part.first));
+		System::window->draw(BODY_PART(SHAPE, part.first));
 }
 
 Suspect::BodyPart* Suspect::GetBodyPart(const std::string& body_part_name)
