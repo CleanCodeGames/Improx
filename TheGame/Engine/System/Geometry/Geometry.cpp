@@ -13,7 +13,7 @@ const float Geometry::Angle(const sf::Vector2f& start_position, const sf::Vector
 
 const sf::Vector2f Geometry::Normalized(const sf::Vector2f& position, const float& dist, const float& angle)
 {
-    const float& A = { angle * RAD_TO_DEG };
+    const float& A = { angle * DEG_TO_RAD };
     return position + sf::Vector2f(std::cosf(A), std::sinf(A)) * dist;
 }
 
