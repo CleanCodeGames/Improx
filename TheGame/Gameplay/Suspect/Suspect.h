@@ -12,9 +12,9 @@ public:
 	typedef std::unordered_map<std::string, BodyPart> Body;
 
 	Body m_body;
-
-	void AddPart(const std::string& part_name);
-	BodyPart* Get(const std::string& name);
+	void BuildBody();
+	void AddBodyPart(const std::string& body_part_name);
+	BodyPart* GetBodyPart(const std::string& body_part_name);
 	Suspect();
 	~Suspect();
 };

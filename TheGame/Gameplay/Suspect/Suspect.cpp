@@ -1,80 +1,82 @@
 #include "Suspect.h"
-
-#define COMPONENT(index, name) std::get<index>(*Get(name))
+#define COMPONENT(index, name) std::get<index>(*GetBodyPart(name))
 
 enum PartIndex
 {
 	SHAPE,
-	HP,
-	POSITION,
-	ORIGIN
+	HIT_POINT
 };
 
 Suspect::Suspect()
 {
-	AddPart("hair");						// Волосы (скальп)
-	AddPart("head");						// Голова
+	BuildBody();
+}
 
-	AddPart("left_eye");					// Левый  глаз
-	AddPart("right_eye");					// Правый глаз
+void Suspect::BuildBody()
+{
+	// Волосы (скальп)
+	AddBodyPart("hair");					
 
-	AddPart("corpus");						// Туловище
+	// Голова
+	AddBodyPart("head");
 
-	AddPart("left_hand_arm");				// Левое  плечо
-	AddPart("right_hand_arm");				// Правое пплечо
+	// Левый  глаз
+	AddBodyPart("left_eye");
 
-	AddPart("left_hand_forearm");			// Левое  предплечье
-	AddPart("right_hand_forearm");			// Правое предплечье
+	// Правый глаз
+	AddBodyPart("right_eye");
 
-	AddPart("left_hand_wrist");				// Левое  запястье (кисть)
-	AddPart("right_hand_wrist");			// Правое запястье (кисть)
+	// Туловище
+	AddBodyPart("corpus");
 
-	AddPart("left_hand_finger_pinkie");		// Палец левой руки (мизинец)
-	AddPart("left_hand_finger_ring");		// Палец левой руки (безымянный)
-	AddPart("left_hand_finger_middle");		// Палец левой руки (средний)
-	AddPart("left_hand_finger_index");		// Палец левой руки (указательный)
-	AddPart("left_hand_finger_big");		// Палец левой руки (большой)
+	// Левое  плечо
+	AddBodyPart("left_hand_arm");
 
-	AddPart("right_hand_finger_pinkie");	// Палец правой руки (мизинец)
-	AddPart("right_hand_finger_ring");		// Палец правой руки (безымянный)
-	AddPart("right_hand_finger_middle");	// Палец правой руки (средний)
-	AddPart("right_hand_finger_index");		// Палец правой руки (указательный)
-	AddPart("right_hand_finger_big");		// Палец правой руки (большой)
-
-	AddPart("left_leg_hip");				// Левое  бедро
-	AddPart("right_leg_hip");				// Правое бедро
-
-	AddPart("left_leg_shin");				// Левая  голень
-	AddPart("right_leg_shin");				// Правая голень
-
-	AddPart("left_leg_foot");				// Левая  стопа
-	AddPart("right_leg_foot");				// Правая стопа
-
-	AddPart("left_leg_finger_pinkie");		// Палец левой ноги (мизинец)
-	AddPart("left_leg_finger_ring");		// Палец левой ноги (безымянный)
-	AddPart("left_leg_finger_middle");		// Палец левой ноги (средний)
-	AddPart("left_leg_finger_index");		// Палец левой ноги (указательный)
-	AddPart("left_leg_finger_big");			// Палец левой ноги (большой)
-
-	AddPart("right_leg_finger_pinkie");		// Палец правой ноги (мизинец)
-	AddPart("right_leg_finger_ring");		// Палец правой ноги (безымянный)
-	AddPart("right_leg_finger_middle");		// Палец правой ноги (средний)
-	AddPart("right_leg_finger_index");		// Палец правой ноги (указательный)
-	AddPart("right_leg_finger_big");		// Палец правой ноги (большой)
+	AddBodyPart("right_hand_arm");							// Правое пплечо
+	AddBodyPart("left_hand_forearm");						// Левое  предплечье
+	AddBodyPart("right_hand_forearm");						// Правое предплечье
+	AddBodyPart("left_hand_wrist");							// Левое  запястье (кисть)
+	AddBodyPart("right_hand_wrist");						// Правое запястье (кисть)
+	AddBodyPart("left_hand_finger_pinkie");					// Палец левой руки (мизинец)
+	AddBodyPart("left_hand_finger_ring");					// Палец левой руки (безымянный)
+	AddBodyPart("left_hand_finger_middle");					// Палец левой руки (средний)
+	AddBodyPart("left_hand_finger_index");					// Палец левой руки (указательный)
+	AddBodyPart("left_hand_finger_big");					// Палец левой руки (большой)
+	AddBodyPart("right_hand_finger_pinkie");				// Палец правой руки (мизинец)
+	AddBodyPart("right_hand_finger_ring");					// Палец правой руки (безымянный)
+	AddBodyPart("right_hand_finger_middle");				// Палец правой руки (средний)
+	AddBodyPart("right_hand_finger_index");					// Палец правой руки (указательный)
+	AddBodyPart("right_hand_finger_big");					// Палец правой руки (большой)
+	AddBodyPart("left_leg_hip");							// Левое  бедро
+	AddBodyPart("right_leg_hip");							// Правое бедро
+	AddBodyPart("left_leg_shin");							// Левая  голень
+	AddBodyPart("right_leg_shin");							// Правая голень
+	AddBodyPart("left_leg_foot");							// Левая  стопа
+	AddBodyPart("right_leg_foot");							// Правая стопа
+	AddBodyPart("left_leg_finger_pinkie");					// Палец левой ноги (мизинец)
+	AddBodyPart("left_leg_finger_ring");					// Палец левой ноги (безымянный)
+	AddBodyPart("left_leg_finger_middle");					// Палец левой ноги (средний)
+	AddBodyPart("left_leg_finger_index");					// Палец левой ноги (указательный)
+	AddBodyPart("left_leg_finger_big");						// Палец левой ноги (большой)
+	AddBodyPart("right_leg_finger_pinkie");					// Палец правой ноги (мизинец)
+	AddBodyPart("right_leg_finger_ring");					// Палец правой ноги (безымянный)
+	AddBodyPart("right_leg_finger_middle");					// Палец правой ноги (средний)
+	AddBodyPart("right_leg_finger_index");					// Палец правой ноги (указательный)
+	AddBodyPart("right_leg_finger_big");					// Палец правой ноги (большой)
 
 	m_body.rehash(m_body.size());
 }
 
-Suspect::BodyPart* Suspect::Get(const std::string& name)
+Suspect::BodyPart* Suspect::GetBodyPart(const std::string& body_part_name)
 {
-	const auto& it = m_body.find(name);
+	const auto& it = m_body.find(body_part_name);
 	return it != m_body.end() ? &it->second : nullptr;
 }
 
-void Suspect::AddPart(const std::string& part_name)
+void Suspect::AddBodyPart(const std::string& body_part_name)
 {
 	const BodyPart& part = std::make_tuple(sf::RectangleShape(), int(), sf::Vector2f(), sf::Vector2f());
-	m_body.insert({ part_name,  part });
+	m_body.insert({ body_part_name,  part });
 }
 
 Suspect::~Suspect()
