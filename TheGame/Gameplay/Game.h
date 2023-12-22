@@ -1,6 +1,6 @@
 #pragma once
 #include "Engine/System/System.h"
-
+#include "Gameplay/Suspect/Suspect.h"
 class Game
 {
 private:
@@ -9,9 +9,7 @@ private:
 	void Render();
 	void Action();
 
-	sf::VertexArray vArr;
-
-	//std::vector<std::unique_ptr<ILevel>> vec_level;
+	std::unique_ptr<Suspect> suspect;
 
 public:
 

@@ -4,6 +4,7 @@
 Game::Game()
 {
 	System::Initialization();
+	suspect = std::make_unique<Suspect>();
 }
 
 void Game::Play()
@@ -33,12 +34,8 @@ void Game::Action()
 
 void Game::Render()
 {
-	sf::RectangleShape shape(sf::Vector2f(200, 200));
-	shape.setOrigin(shape.getSize() / 2.f);
-	shape.setTexture(TEXTURE("test"));
 	System::window->clear();
-	System::window->draw(vArr);
-	System::window->draw(shape);
+	suspect->Draw();
 	System::window->display();
 }
 
@@ -46,5 +43,4 @@ void Game::Render()
 
 Game::~Game()
 {
-
 }
