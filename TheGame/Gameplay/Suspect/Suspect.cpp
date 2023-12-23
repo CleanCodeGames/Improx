@@ -65,23 +65,36 @@ void Suspect::BuildBody()
 
 	/* Левое  плечо */
 	AddBodyPart("left_hand_arm");
-	const auto& position_left_hand = Geometry::Normalized(position_corpus, size_corpus.y / 2.0f, rotation_corpus - 120.f);
-	const auto& size_left_hand = sf::Vector2f(64.f, 192.f);
-	const auto& origin_left_hand = sf::Vector2f(size_left_hand.x / 2.f, 0.f);
-	BuildPart(BODYPART(SHAPE, "left_hand_arm"), position_left_hand, size_left_hand, origin_left_hand, sf::Color::Red);
+	const auto& position_left_hand_arm = Geometry::Normalized(position_corpus, size_corpus.y / 2.0f, rotation_corpus - 120.f);
+	const auto& size_left_hand_arm = sf::Vector2f(64.f, 192.f);
+	const auto& origin_left_hand_arm = sf::Vector2f(size_left_hand_arm.x / 2.f, 0.f);
+	BuildPart(BODYPART(SHAPE, "left_hand_arm"), position_left_hand_arm, size_left_hand_arm, origin_left_hand_arm, sf::Color::Red);
 	BODYPART(SHAPE, "left_hand_arm").setRotation(105);
 
 	/* Правое пплечо */
 	AddBodyPart("right_hand_arm");
-	const auto& position_right_hand = Geometry::Normalized(position_corpus, size_corpus.y / 2.0f, rotation_corpus - 60.f);
-	const auto& size_right_hand = sf::Vector2f(64.f, 192.f);
-	const auto& origin_right_hand = sf::Vector2f(size_right_hand.x / 2.f, 0.f);
-	BuildPart(BODYPART(SHAPE, "right_hand_arm"), position_right_hand, size_right_hand, origin_right_hand, sf::Color::Magenta);
+	const auto& position_right_hand_arm = Geometry::Normalized(position_corpus, size_corpus.y / 2.0f, rotation_corpus - 60.f);
+	const auto& size_right_hand_arm = sf::Vector2f(64.f, 192.f);
+	const auto& origin_right_hand_arm = sf::Vector2f(size_right_hand_arm.x / 2.f, 0.f);
+	BuildPart(BODYPART(SHAPE, "right_hand_arm"), position_right_hand_arm, size_right_hand_arm, origin_right_hand_arm, sf::Color::Magenta);
 	BODYPART(SHAPE, "right_hand_arm").setRotation(-105);
 
-	AddBodyPart("left_hand_forearm");			// Левое  предплечье
+	/* Левое  предплечье */
+	AddBodyPart("left_hand_forearm");
+	const auto& position_left_hand_forearm = Geometry::Normalized(position_left_hand_arm, size_left_hand_arm.y, BODYPART(SHAPE,"left_hand_arm").getRotation() + 90);
+	const auto& size_left_hand_forearm = sf::Vector2f(56.f, 192.f);
+	const auto& origin_left_hand_forearm = sf::Vector2f(size_left_hand_forearm.x / 2.f, size_left_hand_forearm.y * 0.1f);
+	BuildPart(BODYPART(SHAPE, "left_hand_forearm"), position_left_hand_forearm, size_left_hand_forearm, origin_left_hand_forearm, sf::Color::Blue);
+	BODYPART(SHAPE, "left_hand_forearm").setRotation(60);
 
-	AddBodyPart("right_hand_forearm");			// Правое предплечье
+	/* Правое предплечье */
+	AddBodyPart("right_hand_forearm");
+	const auto& position_right_hand_forearm = Geometry::Normalized(position_right_hand_arm, size_right_hand_arm.y, BODYPART(SHAPE, "right_hand_arm").getRotation() + 90);
+	const auto& size_right_hand_forearm = sf::Vector2f(56.f, 192.f);
+	const auto& origin_right_hand_forearm = sf::Vector2f(size_right_hand_forearm.x / 2.f, size_right_hand_forearm.y * 0.1f);
+	BuildPart(BODYPART(SHAPE, "right_hand_forearm"), position_right_hand_forearm, size_right_hand_forearm, origin_right_hand_forearm, sf::Color::White);
+	BODYPART(SHAPE, "right_hand_forearm").setRotation(300);
+
 	AddBodyPart("left_hand_wrist");				// Левое  запястье (кисть)
 	AddBodyPart("right_hand_wrist");			// Правое запястье (кисть)
 	AddBodyPart("left_hand_finger_pinkie");		// Палец левой руки (мизинец)
@@ -110,8 +123,6 @@ void Suspect::BuildBody()
 	AddBodyPart("right_leg_finger_middle");		// Палец правой ноги (средний)
 	AddBodyPart("right_leg_finger_index");		// Палец правой ноги (указательный)
 	AddBodyPart("right_leg_finger_big");		// Палец правой ноги (большой)
-
-	m_body.rehash(m_body.size());
 }
 
 void Suspect::Draw()

@@ -11,7 +11,7 @@ public:
 	typedef std::tuple<sf::RectangleShape, int> 
 		BodyPart;
 
-	typedef std::unordered_map<std::string, BodyPart> 
+	typedef std::map<std::string, BodyPart> 
 		Body;
 
 	Body m_body;
