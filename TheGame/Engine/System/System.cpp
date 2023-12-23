@@ -19,7 +19,7 @@ void System::Initialization()
 	resolution.y = sf::VideoMode::getDesktopMode().height;
 
 	resources	= std::make_unique<Resources>();
-	window		= std::make_unique<sf::RenderWindow>(sf::VideoMode(resolution.x, resolution.y), L"The game", sf::Style::None);
+	window		= std::make_unique<sf::RenderWindow>(sf::VideoMode(resolution.x * 0.75, resolution.y * 0.75), L"The game", sf::Style::Default);
 	event		= std::make_unique<sf::Event>();
 	clock		= std::make_unique<sf::Clock>();
 	camera		= std::make_unique<sf::View>();
