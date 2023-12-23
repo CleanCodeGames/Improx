@@ -18,6 +18,7 @@ public:
 	void BuildBody();
 	void AddBodyPart(const std::string& body_part_name);
 	BodyPart* GetBodyPart(const std::string& body_part_name);
+	void SwapBodyPart(const std::string& k1, const std::string& k2);
 	void Draw();
 	Suspect();
 	~Suspect();
