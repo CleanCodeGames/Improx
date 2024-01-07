@@ -16,6 +16,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include <Box2D/Box2D.h>
 
 #ifndef _DEBUG
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")

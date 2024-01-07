@@ -5,18 +5,15 @@ class WorldSettings
 {
 private:
 
-	float gravity; // lower 0.9 > 1.0 normal < 1.1 upped
-	std::pair<float, float> force;
+	b2Vec2 gravity = { 0.0f, 0.98f };
+	b2World world = { gravity };
 
 protected:
-
-	void SetForce(const float direction, const float intensity);
-	void SetGravity();
 
 public:
 
 	WorldSettings();
-
+	~WorldSettings();
 
 };
 

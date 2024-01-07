@@ -1,6 +1,20 @@
 #pragma once
 #include "Resources/Resources.h"
 
+class URA
+{
+public:
+
+	URA(void) {}
+	virtual void Update() = 0;
+	virtual void Render() = 0;
+	virtual void Action() = 0;
+	virtual ~URA(void) {};
+};
+
+//. Используется для объявления методов Update() Render() и Action(), а так же конструктора и деструктора по умолчанию для классов унаследовавших URA
+#define DECLARATION_URA(CLASS, VISIBLE) VISIBLE: CLASS(void); void Update() override; void Render() override; void Action() override; ~CLASS() override;
+
 class System
 {
 public:

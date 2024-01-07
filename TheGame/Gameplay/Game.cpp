@@ -1,10 +1,9 @@
 #include "Game.h"
 #include "Engine/System/Input/Input.h"
 
-Game::Game()
+Game::Game(void)
 {
 	System::Initialization();
-	suspect = std::make_unique<Suspect>();
 }
 
 void Game::Play()
@@ -20,7 +19,6 @@ void Game::Play()
 void Game::Update()
 {
 	System::Update();
-	// Write game logic updating code...
 }
 
 void Game::Action()
@@ -35,7 +33,7 @@ void Game::Action()
 void Game::Render()
 {
 	System::window->clear();
-	suspect->Draw();
+
 	System::window->display();
 }
 

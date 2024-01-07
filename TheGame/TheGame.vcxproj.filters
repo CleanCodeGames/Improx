@@ -33,7 +33,7 @@
     <ClCompile Include="Gameplay\Game.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Gameplay\Levels\ILevel.cpp">
+    <ClCompile Include="Gameplay\Levels\oLevel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Gameplay\Player\Player.cpp">
@@ -65,7 +65,7 @@
     <ClInclude Include="Gameplay\Game.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Gameplay\Levels\ILevel.h">
+    <ClInclude Include="Gameplay\Levels\oLevel.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Gameplay\Player\Player.h">

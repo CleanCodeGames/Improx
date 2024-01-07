@@ -1,21 +1,15 @@
 #pragma once
 #include "Engine/System/System.h"
 #include "Gameplay/Suspect/Suspect.h"
-class Game
+#include "Gameplay/Levels/oLevel.h"
+
+class Game : public URA
 {
+	DECLARATION_URA(Game, public)
+	void Play();
+	
 private:
 
-	void Update();
-	void Render();
-	void Action();
-
-	std::unique_ptr<Suspect> suspect;
-
-public:
-
-	void Play();
-
-	Game();
-	~Game();
+	std::unordered_map<std::string, std::unique_ptr<oLevel>> levels;
+	std::unique_ptr<oLevel> current_level;
 };
-
