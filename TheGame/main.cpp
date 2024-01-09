@@ -10,22 +10,43 @@
 using namespace sf;
 using namespace std;
 
-int fps = 0;
-float32 ewidth = 80;
-float32 ehei = 5;
-float32 x = 60;
-float32 y = 75;
+const sf::Vector2f b2Vec2ToVector2f(const b2Vec2& b2v2)
+{
+    sf::Vector2f v2f;
+    v2f.x = b2v2.x * SCALE_B2D;
+    v2f.y = -b2v2.y * SCALE_B2D;
+    return v2f;
+}
+
+const b2Vec2 Vec2fTob2Vec2(const sf::Vector2f& vec)
+{
+    b2Vec2 b2v2;
+    b2v2.x = vec.x / SCALE_B2D;
+    b2v2.y = -vec.y / SCALE_B2D;
+    return b2v2;
+}
+
+// ƒл€ координат ( дл€ размеров не нужен отрицательный Y)
+const b2Vec2 xy2fTob2Vec2(const float& x, const float& y)
+{
+    b2Vec2 b2v2;
+    b2v2.x = x / SCALE_B2D;
+    b2v2.y = -y / SCALE_B2D;
+    return b2v2;
+}
 
 b2Body* CreateStaticBox(b2World& world)
 {
-    b2BodyDef earthdef;
-    earthdef.position.Set(0.0f, -1.35f);
-    b2Body* body = world.CreateBody(&earthdef);
+    b2BodyDef bodydef;
+    b2Vec2 pos = xy2fTob2Vec2(400, 350);
+    bodydef.position.Set(pos.x, pos.y);
+    b2Body* body = world.CreateBody(&bodydef);
     b2PolygonShape groundbox;
-    groundbox.SetAsBox(1.5f, 0.05f);
+
+    b2Vec2 size = xy2fTob2Vec2(300, 10);
+    groundbox.SetAsBox(size.x, -size.y);
     body->CreateFixture(&groundbox, 1.0f);
-    const char* a[] = { "static_box" };
-    body->SetUserData(a);
+    body->SetUserData(const_cast<char*>("static_box"));
     return body;
 }
 
@@ -38,14 +59,12 @@ b2Body* CreateDynamicBox(b2World& world, float x, float y)
     b2Body* body = world.CreateBody(&bodydef);
 
     b2PolygonShape box;
-   //b2CircleShape circle;
-    box.SetAsBox(0.05f, 0.05f);
-   //circle.m_radius = 0.05f;
+    box.SetAsBox(10.f / SCALE_B2D, 10.f / SCALE_B2D);
 
     b2FixtureDef fixdef;
     fixdef.shape = &box;
     fixdef.density = 0.8f;
-    fixdef.friction = 0.8f;
+    fixdef.friction = 0.1f;
     fixdef.restitution = 0.8f;
 
     body->CreateFixture(&fixdef);
@@ -61,38 +80,25 @@ b2Body* CreateDynamicBox(b2World& world, float x, float y)
     return body;
 }
 
-const Vector2f b2Vec2ToVector2f(const b2Vec2& b2v2) {
-    Vector2f v2f;
-    v2f.x = b2v2.x * 200 + 400;
-    v2f.y = -b2v2.y * 200 + 300;
-    return v2f;
-}
-
-const b2Vec2 xyTob2Vec2(const int x, const int y) {
-    b2Vec2 b2v2;
-    b2v2.x = (float32)(x / 200.0);
-    b2v2.y = (float32)(y / 200.0);
-    return b2v2;
-}
-
 int main() 
 {
+    System::Initialization();
+    System::window->close();
+
     vector<b2Body*> boxes;
     b2World world(b2Vec2(0.0, -9.8));
 
     RenderWindow window(VideoMode(800, 600), "Blocks");
-
-    // world.GetBodyList();
     CreateStaticBox(world);
     Clock clock;
+    
 
-
-    RectangleShape stayblock(Vector2f(600, 22));
+    RectangleShape stayblock(Vector2f(600, 20));
     stayblock.setFillColor(Color::Blue);
-    stayblock.setOrigin(301, 11);
-    stayblock.setPosition(b2Vec2ToVector2f(b2Vec2(0.0f, -1.35f)));
+    stayblock.setOrigin(stayblock.getSize() / 2.f);
+    stayblock.setPosition(sf::Vector2f(400, 350));
 
-    RectangleShape block(Vector2f(22, 22));
+    RectangleShape block(Vector2f(20, 20));
     block.setFillColor(Color::White);
 
     while (window.isOpen()) 
@@ -100,25 +106,29 @@ int main()
         System::time_elapsed = clock.getElapsedTime().asSeconds();
         clock.restart();
         world.Step(System::time_elapsed, 8, 3);
-            
-        Event event;
-
-        while (window.pollEvent(event)) 
+          
+        while (window.pollEvent(*System::event)) 
         {
-            if (event.type == Event::Closed)
+            if (System::event->type == Event::Closed)
                 window.close();
 
-            if ((event.type == event.MouseButtonPressed) && Mouse::isButtonPressed(Mouse::Left)) 
+            if ((System::event->type == System::event->MouseButtonPressed) && Mouse::isButtonPressed(Mouse::Left))
             {
                 Vector2i a = Mouse::getPosition(window);
-                b2Vec2 c = xyTob2Vec2(a.x, a.y);
+                b2Vec2 c = xy2fTob2Vec2(a.x, a.y);
                 boxes.push_back(CreateDynamicBox(world, c.x, c.y));
             }
+            if (Input::Keyboard::Pressed(Keyboard::A)) boxes.back()->ApplyLinearImpulse(b2Vec2(-1, 0), boxes.back()->GetWorldCenter(), false);
+            if (Input::Keyboard::Pressed(Keyboard::S)) boxes.back()->ApplyLinearImpulse(b2Vec2(0, 1), boxes.back()->GetWorldCenter(), false);
+            if (Input::Keyboard::Pressed(Keyboard::D)) boxes.back()->ApplyLinearImpulse(b2Vec2(1, 0), boxes.back()->GetWorldCenter(), false);
+            if (Input::Keyboard::Pressed(Keyboard::W)) boxes.back()->ApplyLinearImpulse(b2Vec2(0, -1), boxes.back()->GetWorldCenter(), false);
         }
+
         window.clear();
+
         for (size_t i = 0; i < boxes.size(); i++) 
         {
-            block.setOrigin(11, 11);
+            block.setOrigin(block.getSize() / 2.f);
             block.setPosition(b2Vec2ToVector2f(boxes[i]->GetPosition()));
             block.setRotation(-boxes[i]->GetAngle() * RAD_TO_DEG);
 
@@ -128,6 +138,7 @@ int main()
             else if (static_cast<char const*>(boxes[i]->GetUserData()) == "cyan") block.setFillColor(sf::Color::Cyan);
             window.draw(block);
         }
+
         window.draw(stayblock);
         window.display();
     }
