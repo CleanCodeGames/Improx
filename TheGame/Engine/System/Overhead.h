@@ -26,3 +26,4 @@ static constexpr auto PI = 3.141592f;
 static constexpr auto PI2 = PI * 2.0f;
 static constexpr auto DEG_TO_RAD = 0.017453f;
 static constexpr auto RAD_TO_DEG = 57.29577f;
+static constexpr auto SCALE_B2D = 30.f;

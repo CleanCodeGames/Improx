@@ -45,6 +45,9 @@
     <ClCompile Include="Gameplay\Suspect\Suspect.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="b2dx.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\System\Resources\Resources.h">

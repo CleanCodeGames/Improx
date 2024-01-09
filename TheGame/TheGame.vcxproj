@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="b2dx.cpp" />
     <ClCompile Include="Gameplay\Game.cpp" />
     <ClCompile Include="Gameplay\Levels\oLevel.cpp" />
     <ClCompile Include="Gameplay\World\Settings\WorldSettings.cpp" />
