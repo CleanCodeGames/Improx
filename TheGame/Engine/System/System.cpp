@@ -19,12 +19,12 @@ void System::Initialization()
 	resolution.y = sf::VideoMode::getDesktopMode().height;
 
 	resources	= std::make_unique<Resources>();
-	window		= std::make_unique<sf::RenderWindow>(sf::VideoMode(resolution.x * 0.75, resolution.y * 0.75), L"The game", sf::Style::Default);
+	window		= std::make_unique<sf::RenderWindow>(sf::VideoMode(static_cast<int>(resolution.x * 0.75), static_cast<int>(resolution.y * 0.75)), L"The game", sf::Style::Default);
 	event		= std::make_unique<sf::Event>();
 	clock		= std::make_unique<sf::Clock>();
 	camera		= std::make_unique<sf::View>();
 
-	camera->setSize(static_cast<float>(resolution.x), static_cast<float>(resolution.y));
+	camera->setSize(static_cast<float>(resolution.x), static_cast<float>(-resolution.y));
 	camera->setCenter(0, 0);
 	window->setView(*camera);
 	time_elapsed = 0.f;
