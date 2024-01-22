@@ -10,6 +10,11 @@
 using namespace sf;
 using namespace std;
 
+const sf::Vector2f toVector2f(const b2Vec2& b2v2);
+const sf::Vector2f toVector2f(const float32& x, const float32& y);
+const b2Vec2 toB2Vec2(const sf::Vector2f& v2f);
+const b2Vec2 toB2Vec2(const float32& x, const float32& y);
+
 // ƒл€ координат ( дл€ размеров не нужен отрицательный Y)
 const sf::Vector2f b2Vec2ToVector2f(const b2Vec2& b2v2)
 {
