@@ -1,11 +1,11 @@
 #pragma once
-#include "Engine/System/System.h"
+#include "Engine/System/Utils_b2d.h"
 #include "Gameplay/Suspect/Suspect.h"
 #include "Gameplay/Levels/oLevel.h"
 
 class Game : public URA
 {
-	DECLARATION_URA(Game, public)
+	DECLURA(Game, public)
 	void Play();
 	
 private:

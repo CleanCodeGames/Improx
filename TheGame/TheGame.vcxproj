@@ -140,6 +140,7 @@
     <ClCompile Include="Engine\System\System.cpp" />
     <ClCompile Include="Gameplay\Player\Player.cpp" />
     <ClCompile Include="Gameplay\Suspect\Suspect.cpp" />
+    <ClCompile Include="Engine\System\Utils_b2d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\System\Resources\Resources.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Gameplay\Suspect\Suspect.h" />
     <ClInclude Include="Gameplay\World\Settings\WorldSettings.h" />
     <ClInclude Include="Gameplay\Player\Player.h" />
+    <ClInclude Include="Engine\System\Utils_b2d.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

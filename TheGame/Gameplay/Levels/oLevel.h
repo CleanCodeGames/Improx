@@ -6,7 +6,7 @@
 
 class oLevel : public URA
 {
-	DECLARATION_URA(oLevel, public)
+	DECLURA(oLevel, public)
 
 protected:
 

@@ -14,7 +14,7 @@ public:
 
 //. Используется для объявления методов Update() Render() и Action(), а так же конструктора и деструктора по умолчанию для классов унаследовавших URA
 #define DECLARATION_URA(CLASS, VISIBLE) VISIBLE: CLASS(void); void Update() override; void Render() override; void Action() override; ~CLASS() override;
-
+#define DECLURA(CLASS, VISIBLE) DECLARATION_URA(CLASS, VISIBLE)
 class System
 {
 public:
