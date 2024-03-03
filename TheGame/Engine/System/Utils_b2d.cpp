@@ -1,13 +1,13 @@
 #include "Utils_b2d.h"
 
-void Utils_b2d::CoordsConvert(sf::Vector2f& t)
+void Utils_b2d::CoordsConvert(sf::Vector2f& sf_point)
 {
-    t /= SCALE_B2D;
+    sf_point /= SCALE_B2D;
 }
 
-void Utils_b2d::CoordsConvert(b2Vec2& t)
+void Utils_b2d::CoordsConvert(b2Vec2& b2_point)
 {
-    t *= SCALE_B2D;
+    b2_point *= SCALE_B2D;
 }
 
 const sf::Vector2f Utils_b2d::b2v_to_v2f(const b2Vec2& b2v2)
@@ -54,7 +54,8 @@ b2Body* Utils_b2d::CreateDynamicBox(b2World& world, const sf::Vector2f& position
     bodydef.position.Set(pos.x, pos.y);
 
     b2Body* body = world.CreateBody(&bodydef);
-
+    bool isRot = rand() % 2;
+    body->SetFixedRotation(isRot);
     b2PolygonShape box;
     box.SetAsBox(size.x / SCALE_B2D / 2, size.y / SCALE_B2D / 2);
     b2FixtureDef fixdef;

@@ -12,9 +12,13 @@ public:
 	virtual ~URA(void) {};
 };
 
-//. Используется для объявления методов Update() Render() и Action(), а так же конструктора и деструктора по умолчанию для классов унаследовавших URA
 #define DECLARATION_URA(CLASS, VISIBLE) VISIBLE: CLASS(void); void Update() override; void Render() override; void Action() override; ~CLASS() override;
 #define DECLURA(CLASS, VISIBLE) DECLARATION_URA(CLASS, VISIBLE)
+#define CLASSURA(NAME) class NAME : public URA { DECLURA(NAME, public) };
+#define CLASSURA_ADDITION(NAME, ADDITION_CONTENT) class NAME : public URA { DECLURA(NAME, public) ADDITION_CONTENT };
+#define CLASSDECL(NAME, CONTENT) class NAME { CONTENT };
+#define CLASSDECL_INHERITANCE(NAME, INHERITANCE, CONTENT) class NAME : public INHERITANCE { CONTENT };
+
 class System
 {
 public:

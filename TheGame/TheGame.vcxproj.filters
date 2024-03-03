@@ -51,6 +51,9 @@
     <ClCompile Include="Engine\System\Utils_b2d.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Gameplay\Objects\B2Object.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\System\Resources\Resources.h">
@@ -84,6 +87,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Engine\System\Utils_b2d.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Objects\B2Object.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

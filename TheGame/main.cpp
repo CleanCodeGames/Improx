@@ -1,4 +1,5 @@
 #include "Gameplay/Game.h"
+#include "Gameplay/Objects/B2Object.h"
 
 //  int main()
 //  {
@@ -10,7 +11,8 @@
 int main() 
 {
     System::Initialization();
-    std::vector<b2Body*> boxes;
+    //std::vector<b2Body*> boxes;
+    std::vector<B2ObjectBox> boxes;
     b2Vec2 gravity(9.8f, 9.8f);
     float32 gravity_factor = 0.f;
     b2World world(gravity);
@@ -53,23 +55,32 @@ int main()
 
             if (Input::Mouse::Pressed(sf::Mouse::Left))
             {
-                boxes.push_back(Utils_b2d::CreateDynamicBox(world, sf::Vector2f(System::cursor_world.x, System::cursor_world.y), sf::Vector2f(30, 30)));
+                sf::Vector2f size(float32(15.f + rand() % 40), float32(15.f + rand() % 40));
+                boxes.push_back(B2ObjectBox(world, System::cursor_world, size, b2BodyType::b2_dynamicBody, *TEXTURE("test")));
+                //boxes.push_back(Utils_b2d::CreateDynamicBox(world, sf::Vector2f(System::cursor_world.x, System::cursor_world.y), sf::Vector2f(30, 30)));
             }
 
             if (Input::Mouse::Pressed(sf::Mouse::Right))
             {
-                Utils_b2d::ClearDynamicBoxes(world, boxes);
+                //Utils_b2d::ClearDynamicBoxes(world, boxes);
             }
 
-            if (Input::Keyboard::Pressed(sf::Keyboard::A)) boxes.back()->ApplyLinearImpulse(b2Vec2(-1, 0), boxes.back()->GetWorldCenter(), false);
-            if (Input::Keyboard::Pressed(sf::Keyboard::S)) boxes.back()->ApplyLinearImpulse(b2Vec2(0, 1), boxes.back()->GetWorldCenter(), false);
-            if (Input::Keyboard::Pressed(sf::Keyboard::D)) boxes.back()->ApplyLinearImpulse(b2Vec2(1, 0), boxes.back()->GetWorldCenter(), false);
-            if (Input::Keyboard::Pressed(sf::Keyboard::W)) boxes.back()->ApplyLinearImpulse(b2Vec2(0, -1), boxes.back()->GetWorldCenter(), false);
+            //if (Input::Keyboard::Pressed(sf::Keyboard::A)) boxes.back()->ApplyLinearImpulse(b2Vec2(-1, 0), boxes.back()->GetWorldCenter(), false);
+            //if (Input::Keyboard::Pressed(sf::Keyboard::S)) boxes.back()->ApplyLinearImpulse(b2Vec2(0, 1), boxes.back()->GetWorldCenter(), false);
+            //if (Input::Keyboard::Pressed(sf::Keyboard::D)) boxes.back()->ApplyLinearImpulse(b2Vec2(1, 0), boxes.back()->GetWorldCenter(), false);
+            //if (Input::Keyboard::Pressed(sf::Keyboard::W)) boxes.back()->ApplyLinearImpulse(b2Vec2(0, -1), boxes.back()->GetWorldCenter(), false);
         }
 
         System::window->clear();
 
-        Utils_b2d::UpdateDynamicBoxes(boxes);
+        //Utils_b2d::UpdateDynamicBoxes(boxes);
+
+        for (auto& box : boxes)
+        {
+            box.Update(world);
+            box.Render();
+        }
+
         for (auto& shape : stayblock)
             System::window->draw(shape);
         System::window->display();
