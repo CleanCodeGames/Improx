@@ -1,24 +1,14 @@
 #pragma once
 #include "Engine/System/System.h"
 
-CLASSDECL(B2ObjectBox,
-
+CLASSDECL(B2Object,
 public:
-
-	B2ObjectBox(
-		b2World& world, 
-		const sf::Vector2f& position, 
-		const sf::Vector2f& size, 
-		const b2BodyType type,
-		const sf::Texture& texture
-	);
-
-	void Update(b2World& world);
-	void Render();
-
+	B2Object(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size, const b2BodyType type, const sf::Texture& texture);
+	virtual void Update(b2World& world);
+	virtual void Render();
 	const sf::Texture& texture;
 	sf::Vector2f size;
 	b2Body *body;
 	b2BodyDef bodydef;
-	~B2ObjectBox();
+	virtual ~B2Object();
 )

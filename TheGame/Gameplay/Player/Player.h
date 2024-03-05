@@ -1,18 +1,14 @@
 #pragma once
 #include "Engine/System/System.h"
 #include "Engine/System/Input/Input.h"
-#include "Engine/System/Geometry/Geometry.h"
+#include "Gameplay/Objects/B2Object.h"
 
-class Player
-{
-
+CLASSDECL_INHERITANCE(Player, B2Object,
 public:
-
-	Player();
-	void ChangeWeapon(const std::string name);
-	void Update();
-	void Action();
-	void Render();
-
-	~Player();
-};
+	sf::RectangleShape shape;
+	Player(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size, const b2BodyType type, const sf::Texture& texture);
+	void Update(b2World& world) override;
+	void Render() override;
+	virtual void Action();
+	~Player() override;
+)

@@ -12,7 +12,7 @@ int main()
 {
     System::Initialization();
     //std::vector<b2Body*> boxes;
-    std::vector<B2ObjectBox> boxes;
+    std::vector<B2Object> boxes;
     b2Vec2 gravity(9.8f, 9.8f);
     float32 gravity_factor = 0.f;
     b2World world(gravity);
@@ -47,7 +47,7 @@ int main()
         //System::camera->rotate(5.f * System::time_elapsed);
         System::window->setView(*System::camera);
         world.Step(System::time_elapsed, 8, 3);
-        
+
         while (System::window->pollEvent(*System::event))
         {
             if (System::event->type == sf::Event::Closed)
@@ -56,7 +56,7 @@ int main()
             if (Input::Mouse::Pressed(sf::Mouse::Left))
             {
                 sf::Vector2f size(float32(15.f + rand() % 40), float32(15.f + rand() % 40));
-                boxes.push_back(B2ObjectBox(world, System::cursor_world, size, b2BodyType::b2_dynamicBody, *TEXTURE("test")));
+                boxes.push_back(B2Object(world, System::cursor_world, size, b2BodyType::b2_dynamicBody, *TEXTURE("test")));
                 //boxes.push_back(Utils_b2d::CreateDynamicBox(world, sf::Vector2f(System::cursor_world.x, System::cursor_world.y), sf::Vector2f(30, 30)));
             }
 

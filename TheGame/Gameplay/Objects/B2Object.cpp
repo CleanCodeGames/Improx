@@ -1,8 +1,8 @@
 #include "B2Object.h"
 #include "Engine/System/Utils_b2d.h"
-B2ObjectBox::B2ObjectBox(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size, const b2BodyType type, const sf::Texture& texture) : texture(texture)
+B2Object::B2Object(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size, const b2BodyType type, const sf::Texture& texture) : texture(texture)
 {
-	b2Vec2 p = Utils_b2d::xy_to_b2v(position.x, position.y);
+	const b2Vec2& p = Utils_b2d::xy_to_b2v(position.x, position.y);
 
 	bodydef.type = type;
 	bodydef.position.Set(p.x, p.y);
@@ -22,12 +22,12 @@ B2ObjectBox::B2ObjectBox(b2World& world, const sf::Vector2f& position, const sf:
 	body->CreateFixture(&fd);
 }
 
-void B2ObjectBox::Update(b2World& world)
+void B2Object::Update(b2World& world)
 {
 
 }
 
-void B2ObjectBox::Render()
+void B2Object::Render()
 {
 	sf::RectangleShape shape(size);
 	shape.setTexture(&texture);
@@ -38,6 +38,6 @@ void B2ObjectBox::Render()
 	System::window->draw(shape);
 }
 
-B2ObjectBox::~B2ObjectBox()
+B2Object::~B2Object()
 {
 }
