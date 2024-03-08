@@ -1,6 +1,6 @@
 #include "Gameplay/Game.h"
 #include "Gameplay/Objects/B2Object.h"
-
+#include "Gameplay/Player/Player.h"
 //  int main()
 //  {
 //  	Game game;
@@ -38,13 +38,14 @@ int main()
         shape.setFillColor(sf::Color::Blue);
         shape.setOrigin(shape.getSize() / 2.f);
     }
+
+    Player player(world, sf::Vector2f(0, 0), sf::Vector2f(125, 125), b2BodyType::b2_dynamicBody, *TEXTURE("qqq"));
     
     while (System::window->isOpen()) 
     {
         System::Update();
         gravity_factor += System::time_elapsed;
         world.SetGravity(b2Vec2(gravity.x * std::cosf(gravity_factor), gravity.y * std::sinf(gravity_factor)));
-        //System::camera->rotate(5.f * System::time_elapsed);
         System::window->setView(*System::camera);
         world.Step(System::time_elapsed, 8, 3);
 
@@ -57,23 +58,11 @@ int main()
             {
                 sf::Vector2f size(float32(15.f + rand() % 40), float32(15.f + rand() % 40));
                 boxes.push_back(B2Object(world, System::cursor_world, size, b2BodyType::b2_dynamicBody, *TEXTURE("test")));
-                //boxes.push_back(Utils_b2d::CreateDynamicBox(world, sf::Vector2f(System::cursor_world.x, System::cursor_world.y), sf::Vector2f(30, 30)));
             }
-
-            if (Input::Mouse::Pressed(sf::Mouse::Right))
-            {
-                //Utils_b2d::ClearDynamicBoxes(world, boxes);
-            }
-
-            //if (Input::Keyboard::Pressed(sf::Keyboard::A)) boxes.back()->ApplyLinearImpulse(b2Vec2(-1, 0), boxes.back()->GetWorldCenter(), false);
-            //if (Input::Keyboard::Pressed(sf::Keyboard::S)) boxes.back()->ApplyLinearImpulse(b2Vec2(0, 1), boxes.back()->GetWorldCenter(), false);
-            //if (Input::Keyboard::Pressed(sf::Keyboard::D)) boxes.back()->ApplyLinearImpulse(b2Vec2(1, 0), boxes.back()->GetWorldCenter(), false);
-            //if (Input::Keyboard::Pressed(sf::Keyboard::W)) boxes.back()->ApplyLinearImpulse(b2Vec2(0, -1), boxes.back()->GetWorldCenter(), false);
+            player.Action();
         }
 
         System::window->clear();
-
-        //Utils_b2d::UpdateDynamicBoxes(boxes);
 
         for (auto& box : boxes)
         {
@@ -81,8 +70,28 @@ int main()
             box.Render();
         }
 
+        static sf::Color color(255,255,255);
+        for (b2Contact* contact = world.GetContactList(); contact; contact = contact->GetNext())
+        {
+            if (contact->IsTouching())
+            {
+                static int count = 0;
+                count++;
+                color.g = 0;
+                color.b = 0;
+                std::cout << "Contact #" << count << std::endl;
+            }
+        }
+
+        if (color.g < 255) color.g++;
+        if (color.b < 255) color.b++;
+        player.shape.setFillColor(color);
+        player.Update(world);
+        player.Render();
+
         for (auto& shape : stayblock)
             System::window->draw(shape);
+
         System::window->display();
     }
     return 0;

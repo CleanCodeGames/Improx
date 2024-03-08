@@ -1,6 +1,4 @@
 #pragma once
-#include "Engine/System/System.h"
-#include "Engine/System/Input/Input.h"
 #include "Gameplay/Objects/B2Object.h"
 
 CLASSDECL_INHERITANCE(Player, B2Object,
