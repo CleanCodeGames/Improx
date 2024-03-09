@@ -57,20 +57,16 @@ public:
 
 };
 
-class Resources
-{
-private:
-
-    std::vector<std::filesystem::path> SerchPaths();
-    std::vector<std::filesystem::path> ScanDirectory(const std::string& pathDir);
-    void AddFile(std::filesystem::path path);
-
+CLASSDECL(Resources,
 public:
-
     Texture texture;
     Shader shader;
     Audio audio;
     Font font;
-
     Resources();
-};
+
+private:
+    std::vector<std::filesystem::path> SerchPaths();
+    std::vector<std::filesystem::path> ScanDirectory(const std::string& pathDir);
+    void AddFile(std::filesystem::path path);
+)

@@ -4,14 +4,9 @@
 #include "Engine/System/Geometry/Geometry.h"
 #include "Gameplay/World/Settings/WorldSettings.h"
 
-class oLevel : public URA
-{
-	DECLURA(oLevel, public)
-
+CLASSURA_ADDITION(oLevel,
 protected:
-
 	bool m_is_level_complete;
 	std::string m_name_level;
 	WorldSettings m_world_settings;
-};
-
+)

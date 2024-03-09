@@ -8,6 +8,7 @@ public:
 	virtual void Render(const sf::Texture* texture = nullptr);
 	virtual ~B2Object();
 
+protected:
 	sf::Vector2f size;
 	b2Body *body;
 	b2BodyDef bodydef;
@@ -19,4 +20,4 @@ public:
 	virtual void Update(const b2World& world) override;
 	virtual void Render(const sf::Texture* texture = nullptr) override;
 	virtual ~B2ObjectBox() override;
-	)
+)

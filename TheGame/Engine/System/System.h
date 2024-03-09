@@ -1,26 +1,7 @@
 #pragma once
 #include "Resources/Resources.h"
 
-class URA
-{
-public:
-
-	URA(void) {}
-	virtual void Update() = 0;
-	virtual void Render() = 0;
-	virtual void Action() = 0;
-	virtual ~URA(void) {};
-};
-
-#define DECLARATION_URA(CLASS, VISIBLE) VISIBLE: CLASS(void); void Update() override; void Render() override; void Action() override; ~CLASS() override;
-#define DECLURA(CLASS, VISIBLE) DECLARATION_URA(CLASS, VISIBLE)
-#define CLASSURA(NAME) class NAME : public URA { DECLURA(NAME, public) };
-#define CLASSURA_ADDITION(NAME, ADDITION_CONTENT) class NAME : public URA { DECLURA(NAME, public) ADDITION_CONTENT };
-#define CLASSDECL(NAME, CONTENT) class NAME { CONTENT };
-#define CLASSDECL_INHERITANCE(NAME, INHERITANCE, CONTENT) class NAME : public INHERITANCE { CONTENT };
-
-class System
-{
+CLASSDECL(System,
 public:
 
 	static std::unique_ptr<sf::RenderWindow> window;
@@ -40,7 +21,7 @@ public:
 
 	System() = delete;
 	~System() = delete;
-};
+)
 
 #define TEXTURE(file_name) System::resources->texture.Get(file_name)
 #define SOUND(file_name) System::resources->audio.sound.GetSound(file_name)
