@@ -35,3 +35,18 @@ const b2Vec2 Utils_b2d::DicectionToCursor(b2Body* body)
     direction.Normalize();
     return -direction;
 }
+
+const b2Vec2 operator / (const b2Vec2& lhs, const float& rhs)
+{
+    b2Vec2 result;
+    result.x = lhs.x / rhs;
+    result.y = lhs.y / rhs;
+    return result;
+}
+
+const b2Vec2& operator /= (b2Vec2& lhs, const float& rhs)
+{
+    lhs.x /= rhs;
+    lhs.y /= rhs;
+    return lhs;
+}

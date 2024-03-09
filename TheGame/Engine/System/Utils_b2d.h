@@ -12,3 +12,5 @@ public:
     static const b2Vec2 DicectionToCursor(b2Body* body);                      // Нормализованный вектор направления от тела до глобального курсора мыши
 )
 
+const b2Vec2 operator / (const b2Vec2& lhs, const float& rhs);
+const b2Vec2& operator /= (b2Vec2& lhs, const float& rhs);

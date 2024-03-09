@@ -54,6 +54,9 @@
     <ClCompile Include="Gameplay\B2Objects\B2ObjectBox.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectChain.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\System\Resources\Resources.h">

@@ -1,12 +1,13 @@
 #include "B2Object.h"
 #include "Engine/System/Utils_b2d.h"
 
-B2ObjectBox::B2ObjectBox(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size, const b2BodyType type) : B2Object(position, size, type)
+B2ObjectBox::B2ObjectBox(b2World& world, B2OBJECT_ARGS) : B2OBJECT_IMPL
 {
 	body = world.CreateBody(&bodydef);
 
 	b2PolygonShape box;
-	box.SetAsBox(size.x / SCALE_B2D / 2.f, size.y / SCALE_B2D / 2.f);
+	const b2Vec2& s = Utils_b2d::v2f_to_b2v(size) / 2.f;
+	box.SetAsBox(s.x, s.y);
 
 
 	b2FixtureDef fd;

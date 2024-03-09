@@ -3,14 +3,14 @@
 #include "Engine/System/Geometry/Geometry.h"
 #include "Engine/System/Input/Input.h"
 
-B2ObjectPlayer::B2ObjectPlayer(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size, const b2BodyType type, sf::Texture* texture)
-	: B2Object(position, size, type), texture(texture)
+B2ObjectPlayer::B2ObjectPlayer(b2World& world, B2OBJECT_ARGS, sf::Texture* texture) : B2OBJECT_IMPL
 {
 	const b2Vec2& p = Utils_b2d::xy_to_b2v(position.x, position.y);
 
 	b2PolygonShape box;
 
-	box.SetAsBox(size.x / SCALE_B2D / 2.f, size.y / SCALE_B2D / 2.f);
+	const b2Vec2& s = Utils_b2d::v2f_to_b2v(size) / 2.f;
+	box.SetAsBox(s.x, s.y);
 	this->size = size;
 
 	b2FixtureDef fd;
