@@ -16,28 +16,11 @@ int main()
     b2Vec2 gravity(9.8f, 9.8f);
     float32 gravity_factor = 0.f;
     b2World world(gravity);
-    Utils_b2d::CreateStaticBox(world, sf::Vector2f(0, 300), sf::Vector2f(600, 25));
-    Utils_b2d::CreateStaticBox(world, sf::Vector2f(0, -300), sf::Vector2f(600, 25));
-    Utils_b2d::CreateStaticBox(world, sf::Vector2f(300, 0), sf::Vector2f(25, 600));
-    Utils_b2d::CreateStaticBox(world, sf::Vector2f(-300, 0), sf::Vector2f(25, 600));
-
-    sf::RectangleShape stayblock[4] = { 
-        sf::RectangleShape(sf::Vector2f(600, 25)), 
-        sf::RectangleShape(sf::Vector2f(600, 25)), 
-        sf::RectangleShape(sf::Vector2f(25, 600)), 
-        sf::RectangleShape(sf::Vector2f(25, 600)) 
-    };
-
-    stayblock[0].setPosition(sf::Vector2f(0, 300));
-    stayblock[1].setPosition(sf::Vector2f(0, -300));
-    stayblock[2].setPosition(sf::Vector2f(300, 0));
-    stayblock[3].setPosition(sf::Vector2f(-300, 0));
-
-    for (auto& shape : stayblock)
-    {
-        shape.setFillColor(sf::Color::Blue);
-        shape.setOrigin(shape.getSize() / 2.f);
-    }
+    std::vector<B2Object> walls;
+    walls.push_back(B2Object(world, sf::Vector2f(0, 300), sf::Vector2f(600, 25), b2BodyType::b2_staticBody, *TEXTURE("test")));
+    walls.push_back(B2Object(world, sf::Vector2f(0, -300), sf::Vector2f(600, 25), b2BodyType::b2_staticBody, *TEXTURE("test")));
+    walls.push_back(B2Object(world, sf::Vector2f(300, 0), sf::Vector2f(25, 600), b2BodyType::b2_staticBody, *TEXTURE("test")));
+    walls.push_back(B2Object(world, sf::Vector2f(-300, 0), sf::Vector2f(25, 600), b2BodyType::b2_staticBody, *TEXTURE("test")));
 
     Player player(world, sf::Vector2f(0, 0), sf::Vector2f(125, 125), b2BodyType::b2_dynamicBody, *TEXTURE("qqq"));
     
@@ -89,8 +72,8 @@ int main()
         player.Update(world);
         player.Render();
 
-        for (auto& shape : stayblock)
-            System::window->draw(shape);
+        for (auto& wall : walls)
+            wall.Render();
 
         System::window->display();
     }

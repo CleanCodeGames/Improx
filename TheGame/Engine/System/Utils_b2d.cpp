@@ -35,16 +35,3 @@ const b2Vec2 Utils_b2d::DicectionToCursor(b2Body* body)
     direction.Normalize();
     return -direction;
 }
-
-b2Body* Utils_b2d::CreateStaticBox(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size)
-{
-    b2BodyDef bodydef;
-    b2Vec2 pos = xy_to_b2v(position.x, position.y);
-    bodydef.position.Set(pos.x, pos.y);
-    b2Body* body = world.CreateBody(&bodydef);
-    b2PolygonShape groundbox;
-    groundbox.SetAsBox(size.x / SCALE_B2D / 2, size.y / SCALE_B2D / 2);
-    body->CreateFixture(&groundbox, 1.0f);
-    body->SetUserData(const_cast<char*>("static_box"));
-    return body;
-}
