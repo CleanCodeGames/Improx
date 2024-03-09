@@ -1,6 +1,6 @@
 #include "Gameplay/Game.h"
 #include "Gameplay/Objects/B2Object.h"
-#include "Gameplay/Player/Player.h"
+#include "Gameplay/Player/B2ObjectPlayer.h"
 //  int main()
 //  {
 //  	Game game;
@@ -11,18 +11,20 @@
 int main() 
 {
     System::Initialization();
-    //std::vector<b2Body*> boxes;
-    std::vector<B2Object> boxes;
+
+    std::vector<B2ObjectBox> boxes;
+    std::vector<B2ObjectBox> walls;
+
     b2Vec2 gravity(9.8f, 9.8f);
     float32 gravity_factor = 0.f;
     b2World world(gravity);
-    std::vector<B2Object> walls;
-    walls.push_back(B2Object(world, sf::Vector2f(0, 300), sf::Vector2f(600, 25), b2BodyType::b2_staticBody, *TEXTURE("test")));
-    walls.push_back(B2Object(world, sf::Vector2f(0, -300), sf::Vector2f(600, 25), b2BodyType::b2_staticBody, *TEXTURE("test")));
-    walls.push_back(B2Object(world, sf::Vector2f(300, 0), sf::Vector2f(25, 600), b2BodyType::b2_staticBody, *TEXTURE("test")));
-    walls.push_back(B2Object(world, sf::Vector2f(-300, 0), sf::Vector2f(25, 600), b2BodyType::b2_staticBody, *TEXTURE("test")));
+    
+    walls.push_back(B2ObjectBox(world, sf::Vector2f(0, 300), sf::Vector2f(600, 25), b2BodyType::b2_staticBody));
+    walls.push_back(B2ObjectBox(world, sf::Vector2f(0, -300), sf::Vector2f(600, 25), b2BodyType::b2_staticBody));
+    walls.push_back(B2ObjectBox(world, sf::Vector2f(300, 0), sf::Vector2f(25, 600), b2BodyType::b2_staticBody));
+    walls.push_back(B2ObjectBox(world, sf::Vector2f(-300, 0), sf::Vector2f(25, 600), b2BodyType::b2_staticBody));
 
-    Player player(world, sf::Vector2f(0, 0), sf::Vector2f(125, 125), b2BodyType::b2_dynamicBody, *TEXTURE("qqq"));
+    B2ObjectPlayer player(world, sf::Vector2f(0, 0), sf::Vector2f(125, 125), b2BodyType::b2_dynamicBody, TEXTURE("qqq"));
     
     while (System::window->isOpen()) 
     {
@@ -40,7 +42,7 @@ int main()
             if (Input::Mouse::Pressed(sf::Mouse::Left))
             {
                 sf::Vector2f size(float32(15.f + rand() % 40), float32(15.f + rand() % 40));
-                boxes.push_back(B2Object(world, System::cursor_world, size, b2BodyType::b2_dynamicBody, *TEXTURE("test")));
+                boxes.push_back(B2ObjectBox(world, System::cursor_world, size, b2BodyType::b2_dynamicBody));
             }
             player.Action();
         }
@@ -50,7 +52,7 @@ int main()
         for (auto& box : boxes)
         {
             box.Update(world);
-            box.Render();
+            box.Render(TEXTURE("test"));
         }
 
         static sf::Color color(255,255,255);

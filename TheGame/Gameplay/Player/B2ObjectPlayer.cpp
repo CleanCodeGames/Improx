@@ -1,10 +1,10 @@
-#include "Player.h"
+#include "B2ObjectPlayer.h"
 #include "Engine/System/Utils_b2d.h"
 #include "Engine/System/Geometry/Geometry.h"
 #include "Engine/System/Input/Input.h"
 
-Player::Player(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size, const b2BodyType type, const sf::Texture& texture) 
-	: B2Object(world, position, size, type, texture)
+B2ObjectPlayer::B2ObjectPlayer(b2World& world, const sf::Vector2f& position, const sf::Vector2f& size, const b2BodyType type, sf::Texture* texture)
+	: B2Object(position, size, type), texture(texture)
 {
 	const b2Vec2& p = Utils_b2d::xy_to_b2v(position.x, position.y);
 
@@ -19,17 +19,19 @@ Player::Player(b2World& world, const sf::Vector2f& position, const sf::Vector2f&
 	fd.friction = 1.0f;
 	fd.restitution = 1.0f;
 
+	body = world.CreateBody(&bodydef);
+
 	body->CreateFixture(&fd);
 	body->SetFixedRotation(true);
 	body->SetGravityScale(0);
 
 	shape.setSize(this->size);
-	shape.setTexture(&texture); 
+	shape.setTexture(texture); 
 	shape.setOrigin(size / 2.f);
 	shape.setScale(1, -1); 
 }
 
-void Player::Update(b2World& world)
+void B2ObjectPlayer::Update(const b2World& world)
 {
 	// Влияние ветра на тело игрока
 	const b2Vec2 force = Utils_b2d::DicectionToCursor(body);
@@ -45,12 +47,12 @@ void Player::Update(b2World& world)
 }
 
 
-void Player::Render()
+void B2ObjectPlayer::Render(const sf::Texture* texture)
 {
 	System::window->draw(shape);
 }
 
-void Player::Action()
+void B2ObjectPlayer::Action()
 {
 	const b2Vec2& p = body->GetPosition();
 
@@ -64,7 +66,7 @@ void Player::Action()
 		body->ApplyLinearImpulse(b2Vec2(0, -10), b2Vec2(p.x, p.y + -30), true);
 }
 
-Player::~Player()
+B2ObjectPlayer::~B2ObjectPlayer()
 {
 
 }
