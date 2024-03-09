@@ -36,7 +36,7 @@
     <ClCompile Include="Gameplay\Levels\oLevel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Gameplay\Player\B2ObjectPlayer.cpp">
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Gameplay\World\Settings\WorldSettings.cpp">
@@ -48,7 +48,10 @@
     <ClCompile Include="Engine\System\Utils_b2d.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Gameplay\Objects\B2Object.cpp">
+    <ClCompile Include="Gameplay\B2Objects\B2Object.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectBox.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,16 +77,13 @@
     <ClInclude Include="Gameplay\Levels\oLevel.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Gameplay\Player\B2ObjectPlayer.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Gameplay\World\Settings\WorldSettings.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Engine\System\Utils_b2d.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Gameplay\Objects\B2Object.h">
+    <ClInclude Include="Gameplay\B2Objects\B2Object.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,5 @@
 #include "Gameplay/Game.h"
-#include "Gameplay/Objects/B2Object.h"
-#include "Gameplay/Player/B2ObjectPlayer.h"
+#include "Gameplay/B2Objects/B2Object.h"
 //  int main()
 //  {
 //  	Game game;

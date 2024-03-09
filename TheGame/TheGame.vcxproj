@@ -130,16 +130,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="b2dx.cpp" />
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectBox.cpp" />
     <ClCompile Include="Gameplay\Game.cpp" />
     <ClCompile Include="Gameplay\Levels\oLevel.cpp" />
-    <ClCompile Include="Gameplay\Objects\B2Object.cpp" />
+    <ClCompile Include="Gameplay\B2Objects\B2Object.cpp" />
     <ClCompile Include="Gameplay\World\Settings\WorldSettings.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine\System\Resources\Resources.cpp" />
     <ClCompile Include="Engine\System\Geometry\Geometry.cpp" />
     <ClCompile Include="Engine\System\Input\Input.cpp" />
     <ClCompile Include="Engine\System\System.cpp" />
-    <ClCompile Include="Gameplay\Player\B2ObjectPlayer.cpp" />
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayer.cpp" />
     <ClCompile Include="Engine\System\Utils_b2d.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +151,8 @@
     <ClInclude Include="Engine\System\System.h" />
     <ClInclude Include="Gameplay\Game.h" />
     <ClInclude Include="Gameplay\Levels\oLevel.h" />
-    <ClInclude Include="Gameplay\Objects\B2Object.h" />
+    <ClInclude Include="Gameplay\B2Objects\B2Object.h" />
     <ClInclude Include="Gameplay\World\Settings\WorldSettings.h" />
-    <ClInclude Include="Gameplay\Player\B2ObjectPlayer.h" />
     <ClInclude Include="Engine\System\Utils_b2d.h" />
   </ItemGroup>
   <ItemGroup>
