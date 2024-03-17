@@ -25,7 +25,7 @@ int main()
 
     B2ObjectPlayer player({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
     B2ObjectBox body_A({ -50, 0 }, { 48,48 }, b2db, world);
-    B2ObjectElasticRope rope({ 0,0 }, { 15,15 }, b2db, player.body, body_A.body, 15, world);
+    B2ObjectElasticRope rope({ 0,0 }, { 10,10 }, b2db, player.body, body_A.body, 64, world);
 
     while (System::window->isOpen()) 
     {

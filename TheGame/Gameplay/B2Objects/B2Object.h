@@ -47,6 +47,5 @@ public:
 
 	std::vector<B2ObjectBox> vec_rope_segments;
 	size_t segments_count;
-	inline void AddSegment(size_t i, b2World& world);
 	B2OBJECT_DECL_ADDITION(B2ObjectElasticRope, b2Body* bodyA, b2Body* bodyB, const size_t segments_count, b2World& world)
 )
