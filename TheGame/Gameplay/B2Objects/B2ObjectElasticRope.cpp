@@ -1,0 +1,67 @@
+#include "B2Object.h"
+#include "Engine/System/Utils_b2d.h"
+// Эластичная веревка (Резинка)
+
+B2ObjectElasticRope::B2ObjectElasticRope(B2OBJECT_ARGS, b2Body* bodyA, b2Body* bodyB, const size_t segments_count, b2World& world) : B2OBJECT_INHERITANCE
+{
+	this->bodyA = bodyA;
+	this->bodyB = bodyB;
+	this->segments_count = segments_count;
+	vec_rope_segments.reserve(segments_count);
+
+	for (size_t i = 0; i < segments_count; i++)
+	{
+		vec_rope_segments.push_back({ position, size, type, world });
+	}
+
+	rope_joint_def.bodyA = this->bodyA;
+	rope_joint_def.bodyB = vec_rope_segments[0].body;
+	rope_joint_def.localAnchorA = this->bodyA->GetWorldCenter();
+	rope_joint_def.localAnchorB = vec_rope_segments[0].body->GetWorldCenter();
+	rope_joint_def.maxLength = 1.f;
+	rope_joint_def.type = b2JointType::e_ropeJoint;
+	rope_joint_def.collideConnected = false;
+	rope_joint = static_cast<b2RopeJoint*>(world.CreateJoint(&rope_joint_def));
+
+	for (size_t i = 1; i < segments_count; i++)
+	{
+		rope_joint_def.bodyA = vec_rope_segments[i - 1].body;
+		rope_joint_def.bodyB = vec_rope_segments[i].body;
+		rope_joint_def.localAnchorA = vec_rope_segments[i - 1].body->GetWorldCenter();
+		rope_joint_def.localAnchorB = vec_rope_segments[i].body->GetWorldCenter();
+		rope_joint_def.collideConnected = false;
+		rope_joint = static_cast<b2RopeJoint*>(world.CreateJoint(&rope_joint_def));
+	}
+
+	rope_joint_def.bodyA = vec_rope_segments[segments_count-1].body;
+	rope_joint_def.bodyB = this->bodyB;
+	rope_joint_def.localAnchorA = vec_rope_segments[segments_count - 1].body->GetWorldCenter();
+	rope_joint_def.localAnchorB = this->bodyB->GetWorldCenter();
+	rope_joint_def.collideConnected = false;
+	rope_joint = static_cast<b2RopeJoint*>(world.CreateJoint(&rope_joint_def));
+}
+
+inline void B2ObjectElasticRope::AddSegment(size_t i, b2World& world)
+{
+	if (i == 0)
+	{
+		
+	}
+}
+
+void B2ObjectElasticRope::Update(const b2World& world)
+{
+	for (auto& segment : vec_rope_segments)
+		segment.Update(world);
+}
+
+void B2ObjectElasticRope::Render(const sf::Texture* texture)
+{
+	for (auto& segment : vec_rope_segments)
+		segment.Render();
+}
+
+B2ObjectElasticRope::~B2ObjectElasticRope()
+{
+
+}

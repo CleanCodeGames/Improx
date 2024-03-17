@@ -1,7 +1,7 @@
 #include "B2Object.h"
 #include "Engine/System/Utils_b2d.h"
 
-B2ObjectBox::B2ObjectBox(b2World& world, B2OBJECT_ARGS) : B2OBJECT_IMPL
+B2ObjectBox::B2ObjectBox(B2OBJECT_ARGS, b2World& world) : B2OBJECT_INHERITANCE
 {
 	body = world.CreateBody(&bodydef);
 
@@ -27,7 +27,8 @@ void B2ObjectBox::Update(const b2World& world)
 void B2ObjectBox::Render(const sf::Texture* texture)
 {
 	sf::RectangleShape shape(size);
-	shape.setTexture(texture);
+	if(texture)
+		shape.setTexture(texture);
 	shape.setOrigin(size / 2.f);
 	shape.setScale(1, -1);
 	shape.setPosition(Utils_b2d::b2v_to_v2f(body->GetPosition()));

@@ -14,22 +14,24 @@ int main()
     std::vector<B2ObjectBox> boxes;
     std::vector<B2ObjectBox> walls;
 
-    b2Vec2 gravity(9.8f, 9.8f);
+    b2Vec2 gravity(0, -9.8f);
     float32 gravity_factor = 0.f;
     b2World world(gravity);
     
-    walls.push_back(B2ObjectBox(world, sf::Vector2f(0, 300), sf::Vector2f(600, 25), b2BodyType::b2_staticBody));
-    walls.push_back(B2ObjectBox(world, sf::Vector2f(0, -300), sf::Vector2f(600, 25), b2BodyType::b2_staticBody));
-    walls.push_back(B2ObjectBox(world, sf::Vector2f(300, 0), sf::Vector2f(25, 600), b2BodyType::b2_staticBody));
-    walls.push_back(B2ObjectBox(world, sf::Vector2f(-300, 0), sf::Vector2f(25, 600), b2BodyType::b2_staticBody));
+    //walls.push_back({ {0, 300},  {600, 25}, b2sb, world });
+    walls.push_back({ {0, -300}, {1000, 25}, b2sb, world });
+    //walls.push_back({ {300, 0},  {25, 600}, b2sb, world });
+    //walls.push_back({ {-300, 0}, {25, 600}, b2sb, world });
 
-    B2ObjectPlayer player(world, sf::Vector2f(0, 0), sf::Vector2f(125, 125), b2BodyType::b2_dynamicBody, TEXTURE("qqq"));
-    
+    B2ObjectPlayer player({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
+    B2ObjectBox body_A({ -50, 0 }, { 48,48 }, b2db, world);
+    B2ObjectElasticRope rope({ 0,0 }, { 15,15 }, b2db, player.body, body_A.body, 15, world);
+
     while (System::window->isOpen()) 
     {
         System::Update();
         gravity_factor += System::time_elapsed;
-        world.SetGravity(b2Vec2(gravity.x * std::cosf(gravity_factor), gravity.y * std::sinf(gravity_factor)));
+       // world.SetGravity({ gravity.x * std::cosf(gravity_factor), gravity.y * std::sinf(gravity_factor) });
         System::window->setView(*System::camera);
         world.Step(System::time_elapsed, 8, 3);
 
@@ -40,8 +42,8 @@ int main()
 
             if (Input::Mouse::Pressed(sf::Mouse::Left))
             {
-                sf::Vector2f size(float32(15.f + rand() % 40), float32(15.f + rand() % 40));
-                boxes.push_back(B2ObjectBox(world, System::cursor_world, size, b2BodyType::b2_dynamicBody));
+                sf::Vector2f size({ 15.f + rand() % 40 }, { 15.f + rand() % 40 });
+                boxes.push_back({ System::cursor_world, size, b2db, world });
             }
             player.Action();
         }
@@ -57,7 +59,7 @@ int main()
         static sf::Color color(255,255,255);
         for (b2Contact* contact = world.GetContactList(); contact; contact = contact->GetNext())
         {
-            if (contact->IsTouching())
+            if (contact->IsTouching() && contact->GetFixtureA()->GetBody() == player.body)
             {
                 static int count = 0;
                 count++;
@@ -72,9 +74,11 @@ int main()
         player.shape.setFillColor(color);
         player.Update(world);
         player.Render();
-
+        rope.Update(world);
         for (auto& wall : walls)
             wall.Render();
+        body_A.Render();
+        rope.Render();
 
         System::window->display();
     }

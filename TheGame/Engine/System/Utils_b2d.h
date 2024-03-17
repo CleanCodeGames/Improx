@@ -1,5 +1,8 @@
 #pragma once
 #include "System.h"
+#define b2sb b2BodyType::b2_staticBody
+#define b2db b2BodyType::b2_dynamicBody
+#define b2kb b2BodyType::b2_kinematicBody
 
 CLASSDECL(Utils_b2d,
 public:

@@ -3,7 +3,7 @@
 #include "Engine/System/Geometry/Geometry.h"
 #include "Engine/System/Input/Input.h"
 
-B2ObjectPlayer::B2ObjectPlayer(b2World& world, B2OBJECT_ARGS, sf::Texture* texture) : B2OBJECT_IMPL
+B2ObjectPlayer::B2ObjectPlayer(B2OBJECT_ARGS, b2World& world, sf::Texture* texture) : B2OBJECT_INHERITANCE, texture(texture)
 {
 	const b2Vec2& p = Utils_b2d::xy_to_b2v(position.x, position.y);
 
@@ -36,11 +36,9 @@ void B2ObjectPlayer::Update(const b2World& world)
 	// Влияние ветра на тело игрока
 	const b2Vec2 force = Utils_b2d::DicectionToCursor(body);
 	const float32 distance = b2Distance(body->GetWorldCenter(), Utils_b2d::v2f_to_b2v(System::cursor_world)) * SCALE_B2D;
-
-	body->ApplyForce(b2Vec2(force.x * distance, force.y * distance), body->GetWorldCenter(), true);
-
-	// Влияние силы импульса на тело игрока
-	//body->ApplyLinearImpulse(Utils_b2d::DicectionToCursor(body), body->GetWorldCenter(), false);
+	
+	if(distance > 60) body->ApplyForce(b2Vec2(force.x * distance, force.y * distance), body->GetWorldCenter(), true);
+	else body->ApplyLinearImpulse(Utils_b2d::DicectionToCursor(body), body->GetWorldCenter(), false);
 	
 	shape.setPosition(Utils_b2d::b2v_to_v2f(body->GetPosition()));
 	shape.setRotation(body->GetAngle() * RAD_TO_DEG);
@@ -54,16 +52,7 @@ void B2ObjectPlayer::Render(const sf::Texture* texture)
 
 void B2ObjectPlayer::Action()
 {
-	const b2Vec2& p = body->GetPosition();
 
-	if (Input::Keyboard::Pressed(sf::Keyboard::A))
-		body->ApplyLinearImpulse(b2Vec2(-10, 0), b2Vec2(p.x + 30, p.y), true);
-	if (Input::Keyboard::Pressed(sf::Keyboard::D))
-		body->ApplyLinearImpulse(b2Vec2( 10, 0), b2Vec2(p.x - 30, p.y), true);
-	if (Input::Keyboard::Pressed(sf::Keyboard::W))
-		body->ApplyLinearImpulse(b2Vec2( 0, 10), b2Vec2(p.x, p.y + 30), true);
-	if (Input::Keyboard::Pressed(sf::Keyboard::S))
-		body->ApplyLinearImpulse(b2Vec2(0, -10), b2Vec2(p.x, p.y + -30), true);
 }
 
 B2ObjectPlayer::~B2ObjectPlayer()
