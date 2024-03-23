@@ -23,7 +23,8 @@ void System::Initialization()
 	event		= std::make_unique<sf::Event>();
 	clock		= std::make_unique<sf::Clock>();
 	camera		= std::make_unique<sf::View>();
-
+	//window->setFramerateLimit(60);
+	//window->setVerticalSyncEnabled(true);
 	camera->setSize(static_cast<float>(resolution.x), static_cast<float>(-resolution.y));
 	camera->setCenter(0, 0);
 	window->setView(*camera);

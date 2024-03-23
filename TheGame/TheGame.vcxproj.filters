@@ -42,9 +42,6 @@
     <ClCompile Include="Gameplay\World\Settings\WorldSettings.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="b2dx.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\System\Utils_b2d.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -58,6 +55,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Gameplay\B2Objects\B2ObjectElasticRope.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectFanBlower.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

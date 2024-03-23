@@ -54,7 +54,9 @@ void B2ObjectElasticRope::Update(const b2World& world)
 void B2ObjectElasticRope::Render(const sf::Texture* texture)
 {
 	for (auto& segment : vec_rope_segments)
-		segment.Render();
+	{
+		segment.Render(texture);
+	}
 }
 
 B2ObjectElasticRope::~B2ObjectElasticRope()

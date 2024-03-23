@@ -25,8 +25,9 @@ int main()
 
     B2ObjectPlayer player({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
     B2ObjectBox body_A({ -50, 0 }, { 48,48 }, b2db, world);
-    B2ObjectElasticRope rope({ 0,0 }, { 10,10 }, b2db, player.body, body_A.body, 64, world);
-
+    B2ObjectElasticRope rope({ 0,0 }, { 5.f, 5.f }, b2db, player.body, body_A.body, 256, world);
+    B2ObjectFanBlower fan1({ 300,0 }, { 150, 25 }, b2kb, world);
+    B2ObjectFanBlower fan2({ -300,0 }, { 150, 25 }, b2kb, world);
     while (System::window->isOpen()) 
     {
         System::Update();
@@ -34,7 +35,6 @@ int main()
        // world.SetGravity({ gravity.x * std::cosf(gravity_factor), gravity.y * std::sinf(gravity_factor) });
         System::window->setView(*System::camera);
         world.Step(System::time_elapsed, 8, 3);
-
         while (System::window->pollEvent(*System::event))
         {
             if (System::event->type == sf::Event::Closed)
@@ -56,6 +56,9 @@ int main()
             box.Render(TEXTURE("test"));
         }
 
+        fan1.Update(world);
+        fan2.Update(world);
+
         static sf::Color color(255,255,255);
         for (b2Contact* contact = world.GetContactList(); contact; contact = contact->GetNext())
         {
@@ -65,7 +68,6 @@ int main()
                 count++;
                 color.g = 0;
                 color.b = 0;
-                std::cout << "Contact #" << count << std::endl;
             }
         }
 
@@ -73,12 +75,14 @@ int main()
         if (color.b < 255) color.b++;
         player.shape.setFillColor(color);
         player.Update(world);
+        fan1.Render(TEXTURE("fan"));
+        fan2.Render(TEXTURE("fan"));
         player.Render();
         rope.Update(world);
         for (auto& wall : walls)
             wall.Render();
         body_A.Render();
-        rope.Render();
+        rope.Render(TEXTURE("ball"));
 
         System::window->display();
     }

@@ -39,6 +39,7 @@ public:
 
 CLASSDECL_INHERITANCE(B2ObjectElasticRope, B2Object,
 public: 
+	B2OBJECT_DECL_ADDITION(B2ObjectElasticRope, b2Body* bodyA, b2Body* bodyB, const size_t segments_count, b2World& world)
 	b2RopeJoint* rope_joint;
 	b2RopeJointDef rope_joint_def;
 
@@ -47,5 +48,10 @@ public:
 
 	std::vector<B2ObjectBox> vec_rope_segments;
 	size_t segments_count;
-	B2OBJECT_DECL_ADDITION(B2ObjectElasticRope, b2Body* bodyA, b2Body* bodyB, const size_t segments_count, b2World& world)
+)
+
+CLASSDECL_INHERITANCE(B2ObjectFanBlower, B2Object,
+public:
+	std::vector<B2ObjectBox> vec_boxes;
+	B2OBJECT_DECL_ADDITION(B2ObjectFanBlower, b2World& world)
 )

@@ -129,10 +129,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="b2dx.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectBox.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectChain.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectElasticRope.cpp" />
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectFanBlower.cpp" />
     <ClCompile Include="Gameplay\Game.cpp" />
     <ClCompile Include="Gameplay\Levels\oLevel.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2Object.cpp" />
