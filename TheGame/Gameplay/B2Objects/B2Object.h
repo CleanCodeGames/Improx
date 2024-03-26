@@ -7,11 +7,15 @@
 #define B2OBJECT_DECL_ADDITION(CLASS, ...) CLASS(B2OBJECT_ARGS, __VA_ARGS__); virtual void Update(const b2World& world); virtual void Render(const sf::Texture* texture = nullptr); virtual ~CLASS();
 
 /*
-* B2Object
-* B2ObjectBox : B2Object
-* B2ObjectPlayer : B2Object
-* B2ObjectChain : B2Object
-* B2ObjectElasticRope : B2Object
+* * * * * * B2Object * * * * * * *
+* 
+* B2ObjectBox			: B2Object
+* B2ObjectCircle		: B2Object
+* B2ObjectPlayer		: B2Object
+* B2ObjectChain			: B2Object
+* B2ObjectElasticRope	: B2Object
+* B2ObjectFanBlower		: B2Object
+* 
 */
 
 CLASSDECL(B2Object,
@@ -22,6 +26,11 @@ sf::Vector2f size; b2Body *body; b2BodyDef bodydef;
 CLASSDECL_INHERITANCE(B2ObjectBox, B2Object,
 public: 
 	B2OBJECT_DECL_ADDITION(B2ObjectBox, b2World& world)
+)
+
+CLASSDECL_INHERITANCE(B2ObjectCircle, B2Object,
+	public:
+		B2OBJECT_DECL_ADDITION(B2ObjectCircle, b2World& world)
 )
 
 CLASSDECL_INHERITANCE(B2ObjectPlayer, B2Object,
@@ -46,12 +55,13 @@ public:
 	b2Body* bodyA;
 	b2Body* bodyB;
 
-	std::vector<B2ObjectBox> vec_rope_segments;
+	std::vector<B2ObjectCircle> vec_rope_segments;
 	size_t segments_count;
 )
 
 CLASSDECL_INHERITANCE(B2ObjectFanBlower, B2Object,
 public:
 	std::vector<B2ObjectBox> vec_boxes;
-	B2OBJECT_DECL_ADDITION(B2ObjectFanBlower, b2World& world)
+	const float angular_velocity;
+	B2OBJECT_DECL_ADDITION(B2ObjectFanBlower, b2World& world, float32 angular_velocity)
 )

@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="Gameplay\B2Objects\B2ObjectBox.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectChain.cpp" />
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectCircle.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectElasticRope.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectFanBlower.cpp" />
     <ClCompile Include="Gameplay\Game.cpp" />

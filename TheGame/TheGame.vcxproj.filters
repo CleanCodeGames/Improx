@@ -60,6 +60,9 @@
     <ClCompile Include="Gameplay\B2Objects\B2ObjectFanBlower.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectCircle.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\System\Resources\Resources.h">
