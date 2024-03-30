@@ -20,3 +20,5 @@ void B2ObjectPlayerMrEsc::Update(const b2World& world)
 {
 
 }
+
+B2ObjectPlayerMrEsc::~B2ObjectPlayerMrEsc() {}

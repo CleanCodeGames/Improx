@@ -51,3 +51,5 @@ void B2ObjectPlayerMrKoc::Update(const b2World& world)
 	shape.setPosition(Utils_b2d::b2v_to_v2f(body->GetPosition()));
 	shape.setRotation(body->GetAngle() * RAD_TO_DEG);
 }
+
+B2ObjectPlayerMrKoc::~B2ObjectPlayerMrKoc() {}
