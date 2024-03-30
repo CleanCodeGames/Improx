@@ -11,9 +11,9 @@
 * 
 * B2ObjectBox			: B2Object	// Твёрдый ящик
 * B2ObjectCircle		: B2Object	// Твёрдый круг
-* B2ObjectChain			: B2Object
-* B2ObjectElasticRope	: B2Object
-* B2ObjectFanBlower		: B2Object
+* B2ObjectChain			: B2Object	// Привязка обхектов (нереализовано)
+* B2ObjectElasticRope	: B2Object	// Верёвка
+* B2ObjectFanBlower		: B2Object	// Вентелятор
 * ∙
 * * * * * B2ObjectPlayer * * * * *
 * ∙
