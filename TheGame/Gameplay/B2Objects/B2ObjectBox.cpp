@@ -26,6 +26,8 @@ void B2ObjectBox::Update(const b2World& world)
 
 void B2ObjectBox::Render(const sf::Texture* texture)
 {
+	sf::Image image;
+	image.create(size.x, size.y);
 	sf::RectangleShape shape(size);
 	if(texture)
 		shape.setTexture(texture);

@@ -52,6 +52,14 @@ public:
 	void Action();
 	)
 
+	CLASSDECL_INHERITANCE(B2ObjectPlayerMrVol, B2ObjectPlayer,
+public:
+	B2OBJECT_DECL_ADDITION(B2ObjectPlayerMrVol, b2World& world, sf::Texture* texture = nullptr)
+		sf::RectangleShape shape;
+	sf::Texture* texture;
+	void Action();
+	)
+
 CLASSDECL_INHERITANCE(B2ObjectBox, B2Object,
 public: 
 	B2OBJECT_DECL_ADDITION(B2ObjectBox, b2World& world)

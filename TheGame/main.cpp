@@ -7,6 +7,7 @@
 //  	return 0;
 //  }
 
+
 int main() 
 {
     System::Initialization();
@@ -18,10 +19,10 @@ int main()
     float32 gravity_factor = 0.f;
     b2World world(gravity);
     
-    //walls.push_back({ {0, 300},  {600, 25}, b2sb, world });
-    walls.push_back({ {0, -300}, {1000, 25}, b2sb, world });
-    //walls.push_back({ {300, 0},  {25, 600}, b2sb, world });
-    //walls.push_back({ {-300, 0}, {25, 600}, b2sb, world });
+    walls.push_back({ {0, 300},  {600, 50}, b2sb, world });
+    walls.push_back({ {0, -300}, {1000, 50}, b2sb, world });
+    walls.push_back({ {300, 0},  {50, 600}, b2sb, world });
+    walls.push_back({ {-300, 0}, {50, 600}, b2sb, world });
 
     B2ObjectPlayerMrKoc playerMrKoc({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
     B2ObjectBox rope_end({ -50, 0 }, { 48,48 }, b2db, world);
@@ -29,11 +30,13 @@ int main()
     B2ObjectFanBlower fan1({ 300,0 }, { 150, 25 }, b2kb, world, 180.f);
     B2ObjectFanBlower fan2({ -300,0 }, { 150, 25 }, b2kb, world, -180.f);
 
+    TEXTURE("box")->setRepeated(true);
+
     while (System::window->isOpen()) 
     {
         System::Update();
         gravity_factor += System::time_elapsed;
-       // world.SetGravity({ gravity.x * std::cosf(gravity_factor), gravity.y * std::sinf(gravity_factor) });
+        world.SetGravity({ gravity.x * std::cosf(gravity_factor), gravity.y * std::sinf(gravity_factor) });
         System::window->setView(*System::camera);
         world.Step(System::time_elapsed, 1, 1);
         while (System::window->pollEvent(*System::event))
@@ -80,9 +83,10 @@ int main()
         fan2.Render(TEXTURE("fan"));
         playerMrKoc.Render();
         rope.Update(world);
+
         for (auto& wall : walls)
-            wall.Render();
-        rope_end.Render();
+            wall.Render(TEXTURE("extra"));
+        rope_end.Render(TEXTURE("box"));
         rope.Render(TEXTURE("ball"));
 
         System::window->display();
