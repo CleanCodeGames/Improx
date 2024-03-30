@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Engine/System/System.h"
 
 #define B2OBJECT_INHERITANCE B2Object(position, size, type)
@@ -6,22 +6,50 @@
 #define B2OBJECT_DECL(CLASS) CLASS(B2OBJECT_ARGS); virtual void Update(const b2World& world); virtual void Render(const sf::Texture* texture = nullptr); virtual ~CLASS();
 #define B2OBJECT_DECL_ADDITION(CLASS, ...) CLASS(B2OBJECT_ARGS, __VA_ARGS__); virtual void Update(const b2World& world); virtual void Render(const sf::Texture* texture = nullptr); virtual ~CLASS();
 
-/*
-* * * * * * B2Object * * * * * * *
+/* 
+* * * * * * B2Object * * * * * * *	
 * 
-* B2ObjectBox			: B2Object
-* B2ObjectCircle		: B2Object
-* B2ObjectPlayer		: B2Object
+* B2ObjectBox			: B2Object	// Твёрдый ящик
+* B2ObjectCircle		: B2Object	// Твёрдый круг
 * B2ObjectChain			: B2Object
 * B2ObjectElasticRope	: B2Object
 * B2ObjectFanBlower		: B2Object
-* 
+* ∙
+* * * * * B2ObjectPlayer * * * * *
+* ∙
+* B2ObjectPlayer		: B2Object			// Игрок без реализации
+* B2ObjectPlayerMrKoc	: B2ObjectPlayer	// MrKoc
+* B2ObjectPlayerMrEsc	: B2ObjectPlayer	// MrEscow
 */
 
 CLASSDECL(B2Object,
 public: B2OBJECT_DECL(B2Object)
 sf::Vector2f size; b2Body *body; b2BodyDef bodydef;
 )
+
+CLASSDECL_INHERITANCE(B2ObjectPlayer, B2Object,
+public:
+	B2OBJECT_DECL_ADDITION(B2ObjectPlayer, b2World& world, sf::Texture* texture = nullptr)
+		sf::RectangleShape shape;
+	sf::Texture* texture;
+	void Action();
+	)
+
+CLASSDECL_INHERITANCE(B2ObjectPlayerMrKoc, B2ObjectPlayer,
+public: 
+	B2OBJECT_DECL_ADDITION(B2ObjectPlayerMrKoc, b2World& world, sf::Texture* texture = nullptr)
+	sf::RectangleShape shape;
+	sf::Texture* texture;
+	void Action();
+)
+
+CLASSDECL_INHERITANCE(B2ObjectPlayerMrEsc, B2ObjectPlayer,
+public:
+	B2OBJECT_DECL_ADDITION(B2ObjectPlayerMrEsc, b2World& world, sf::Texture* texture = nullptr)
+		sf::RectangleShape shape;
+	sf::Texture* texture;
+	void Action();
+	)
 
 CLASSDECL_INHERITANCE(B2ObjectBox, B2Object,
 public: 
@@ -31,14 +59,6 @@ public:
 CLASSDECL_INHERITANCE(B2ObjectCircle, B2Object,
 	public:
 		B2OBJECT_DECL_ADDITION(B2ObjectCircle, b2World& world)
-)
-
-CLASSDECL_INHERITANCE(B2ObjectPlayer, B2Object,
-public: 
-	B2OBJECT_DECL_ADDITION(B2ObjectPlayer, b2World& world, sf::Texture* texture = nullptr)
-	sf::RectangleShape shape;
-	sf::Texture* texture;
-	void Action();
 )
 
 CLASSDECL_INHERITANCE(B2ObjectChain, B2Object,

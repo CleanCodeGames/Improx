@@ -14,9 +14,9 @@ B2ObjectElasticRope::B2ObjectElasticRope(B2OBJECT_ARGS, b2Body* bodyA, b2Body* b
 		vec_rope_segments.push_back({ position, size, type, world });
 		vec_rope_segments[i].body->SetFixedRotation(false);
 		B2ObjectCircle& box = vec_rope_segments[i];
-		box.body->GetFixtureList()->SetFriction(0.35f);
-		box.body->GetFixtureList()->SetDensity(0.f);
-		box.body->GetFixtureList()->SetRestitution(0.f);
+		box.body->GetFixtureList()->SetFriction(0.f);
+		box.body->GetFixtureList()->SetDensity(1.f);
+		box.body->GetFixtureList()->SetRestitution(1.f);
 	}
 
 	rope_joint_def.bodyA = this->bodyA;

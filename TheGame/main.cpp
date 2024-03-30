@@ -23,9 +23,9 @@ int main()
     //walls.push_back({ {300, 0},  {25, 600}, b2sb, world });
     //walls.push_back({ {-300, 0}, {25, 600}, b2sb, world });
 
-    B2ObjectPlayer player({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
+    B2ObjectPlayerMrKoc playerMrKoc({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
     B2ObjectBox body_A({ -50, 0 }, { 48,48 }, b2db, world);
-    B2ObjectElasticRope rope({ 0,0 }, { 10.f, 10.f }, b2db, player.body, body_A.body, 36, world);
+    B2ObjectElasticRope rope({ 0,0 }, { 10.f, 10.f }, b2db, playerMrKoc.body, body_A.body, 36, world);
     B2ObjectFanBlower fan1({ 300,0 }, { 150, 25 }, b2kb, world, 180.f);
     B2ObjectFanBlower fan2({ -300,0 }, { 150, 25 }, b2kb, world, -180.f);
 
@@ -46,7 +46,7 @@ int main()
                 sf::Vector2f size({ 15.f + rand() % 40 }, { 15.f + rand() % 40 });
                 boxes.push_back({ System::cursor_world, size, b2db, world });
             }
-            player.Action();
+            playerMrKoc.Action();
         }
 
         System::window->clear();
@@ -63,7 +63,7 @@ int main()
         static sf::Color color(255,255,255);
         for (b2Contact* contact = world.GetContactList(); contact; contact = contact->GetNext())
         {
-            if (contact->IsTouching() && contact->GetFixtureA()->GetBody() == player.body)
+            if (contact->IsTouching() && contact->GetFixtureA()->GetBody() == playerMrKoc.body)
             {
                 static int count = 0;
                 count++;
@@ -74,11 +74,11 @@ int main()
 
         if (color.g < 255) color.g++;
         if (color.b < 255) color.b++;
-        player.shape.setFillColor(color);
-        player.Update(world);
+        playerMrKoc.shape.setFillColor(color);
+        playerMrKoc.Update(world);
         fan1.Render(TEXTURE("fan"));
         fan2.Render(TEXTURE("fan"));
-        player.Render();
+        playerMrKoc.Render();
         rope.Update(world);
         for (auto& wall : walls)
             wall.Render();

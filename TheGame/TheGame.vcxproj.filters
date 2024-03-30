@@ -63,6 +63,12 @@
     <ClCompile Include="Gameplay\B2Objects\B2ObjectCircle.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayerMrKoc.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayerMrEsc.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\System\Resources\Resources.h">
