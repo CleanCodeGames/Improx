@@ -19,7 +19,8 @@
 * ∙
 * B2ObjectPlayer		: B2Object			// Игрок без реализации
 * B2ObjectPlayerMrKoc	: B2ObjectPlayer	// MrKoc
-* B2ObjectPlayerMrEsc	: B2ObjectPlayer	// MrEscow
+* B2ObjectPlayerMrEsc	: B2ObjectPlayer	// MrEsc
+* B2ObjectPlayerMrVol	: B2ObjectPlayer	// MrVol
 */
 
 CLASSDECL(B2Object,

@@ -24,8 +24,8 @@ int main()
     //walls.push_back({ {-300, 0}, {25, 600}, b2sb, world });
 
     B2ObjectPlayerMrKoc playerMrKoc({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
-    B2ObjectBox body_A({ -50, 0 }, { 48,48 }, b2db, world);
-    B2ObjectElasticRope rope({ 0,0 }, { 10.f, 10.f }, b2db, playerMrKoc.body, body_A.body, 36, world);
+    B2ObjectBox rope_end({ -50, 0 }, { 48,48 }, b2db, world);
+    B2ObjectElasticRope rope({ 0,0 }, { 10.f, 10.f }, b2db, playerMrKoc.body, rope_end.body, 36, world);
     B2ObjectFanBlower fan1({ 300,0 }, { 150, 25 }, b2kb, world, 180.f);
     B2ObjectFanBlower fan2({ -300,0 }, { 150, 25 }, b2kb, world, -180.f);
 
@@ -82,7 +82,7 @@ int main()
         rope.Update(world);
         for (auto& wall : walls)
             wall.Render();
-        body_A.Render();
+        rope_end.Render();
         rope.Render(TEXTURE("ball"));
 
         System::window->display();
