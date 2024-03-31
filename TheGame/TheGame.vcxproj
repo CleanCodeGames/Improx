@@ -156,6 +156,7 @@
     <ClInclude Include="Engine\System\Overhead.h" />
     <ClInclude Include="Engine\System\System.h" />
     <ClInclude Include="Gameplay\Game.h" />
+    <ClInclude Include="Gameplay\GameObjects\GameObjects.h" />
     <ClInclude Include="Gameplay\GUI\GUI_Bars.h" />
     <ClInclude Include="Gameplay\Levels\oLevel.h" />
     <ClInclude Include="Gameplay\B2Objects\B2Object.h" />
