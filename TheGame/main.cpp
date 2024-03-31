@@ -27,9 +27,9 @@ int main()
     B2ObjectPlayerMrKoc playerMrKoc({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
     B2ObjectBox rope_end({ -50, 0 }, { 48,48 }, b2db, world);
     B2ObjectElasticRope rope({ 0,0 }, { 10.f, 10.f }, b2db, playerMrKoc.body, rope_end.body, 36, world);
-    B2ObjectFanBlower fan1({ 300,0 }, { 150, 25 }, b2kb, world, 180.f);
-    B2ObjectFanBlower fan2({ -300,0 }, { 150, 25 }, b2kb, world, -180.f);
-
+    std::vector<B2ObjectFanBlower> vec_fan;
+    vec_fan.push_back(B2ObjectFanBlower({ 300,0 }, { 150, 25 }, b2kb, world, 180.f));
+    vec_fan.push_back(B2ObjectFanBlower({ -300,0 }, { 150, 25 }, b2kb, world, 180.f));
     TEXTURE("box")->setRepeated(true);
 
     while (System::window->isOpen()) 
@@ -49,6 +49,9 @@ int main()
                 const int random = rand() % 40;
                 boxes.push_back({ System::cursor_world, {65.f + random ,65.f + random}, b2db, world });
             }
+            if (Input::Mouse::Pressed(sf::Mouse::Right))
+                vec_fan.push_back(B2ObjectFanBlower(System::cursor_world, { 150, 25 }, b2kb, world, 180.f));
+
             playerMrKoc.Action();
         }
 
@@ -57,11 +60,11 @@ int main()
         for (auto& box : boxes)
         {
             box.Update(world);
-            box.Render(TEXTURE("izumbox"));
+            box.Render(TEXTURE("extra"));
         }
 
-        fan1.Update(world);
-        fan2.Update(world);
+        for (auto& fan : vec_fan)
+            fan.Update(world);
 
         static sf::Color color(255,255,255);
         for (b2Contact* contact = world.GetContactList(); contact; contact = contact->GetNext())
@@ -79,13 +82,13 @@ int main()
         if (color.b < 255) color.b++;
         playerMrKoc.shape.setFillColor(color);
         playerMrKoc.Update(world);
-        fan1.Render(TEXTURE("fan"));
-        fan2.Render(TEXTURE("fan"));
+        for (auto& fan : vec_fan)
+            fan.Render(TEXTURE("fan"));
         playerMrKoc.Render();
         rope.Update(world);
 
         for (auto& wall : walls)
-            wall.Render(TEXTURE("extra"));
+            wall.Render(TEXTURE("izumbox"));
         rope_end.Render(TEXTURE("box"));
         rope.Render(TEXTURE("ball"));
 
