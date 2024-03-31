@@ -20,7 +20,7 @@ int main()
     b2World world(gravity);
     
     //walls.push_back({ {0, 300},  {600, 50}, b2sb, world });
-    walls.push_back({ {0, -300}, {1200, 185}, b2sb, world });
+    walls.push_back({ {0, -300}, {512, 512}, b2sb, world });
     //walls.push_back({ {300, 0},  {50, 600}, b2sb, world });
     //walls.push_back({ {-300, 0}, {50, 600}, b2sb, world });
 
