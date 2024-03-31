@@ -60,7 +60,7 @@ int main()
         for (auto& box : boxes)
         {
             box.Update(world);
-            box.Render(TEXTURE("extra"));
+            box.Render(TEXTURE("greenbox"));
         }
 
         for (auto& fan : vec_fan)
@@ -88,7 +88,7 @@ int main()
         rope.Update(world);
 
         for (auto& wall : walls)
-            wall.Render(TEXTURE("izumbox"));
+            wall.Render(TEXTURE("greenbox"));
         rope_end.Render(TEXTURE("box"));
         rope.Render(TEXTURE("ball"));
 
