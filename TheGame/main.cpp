@@ -19,10 +19,10 @@ int main()
     float32 gravity_factor = 0.f;
     b2World world(gravity);
     
-    walls.push_back({ {0, 300},  {600, 50}, b2sb, world });
-    walls.push_back({ {0, -300}, {1000, 50}, b2sb, world });
-    walls.push_back({ {300, 0},  {50, 600}, b2sb, world });
-    walls.push_back({ {-300, 0}, {50, 600}, b2sb, world });
+    //walls.push_back({ {0, 300},  {600, 50}, b2sb, world });
+    walls.push_back({ {0, -300}, {1000, 100}, b2sb, world });
+    //walls.push_back({ {300, 0},  {50, 600}, b2sb, world });
+    //walls.push_back({ {-300, 0}, {50, 600}, b2sb, world });
 
     B2ObjectPlayerMrKoc playerMrKoc({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
     B2ObjectBox rope_end({ -50, 0 }, { 48,48 }, b2db, world);
@@ -46,8 +46,8 @@ int main()
 
             if (Input::Mouse::Pressed(sf::Mouse::Left))
             {
-                sf::Vector2f size({ 15.f + rand() % 40 }, { 15.f + rand() % 40 });
-                boxes.push_back({ System::cursor_world, size, b2db, world });
+                const int random = rand() % 40;
+                boxes.push_back({ System::cursor_world, {65.f + random ,65.f + random}, b2db, world });
             }
             playerMrKoc.Action();
         }
@@ -57,7 +57,7 @@ int main()
         for (auto& box : boxes)
         {
             box.Update(world);
-            box.Render(TEXTURE("test"));
+            box.Render(TEXTURE("izumbox"));
         }
 
         fan1.Update(world);
