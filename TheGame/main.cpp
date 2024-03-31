@@ -7,6 +7,7 @@
 //  	return 0;
 //  }
 
+
 int main() 
 {
     System::Initialization();
@@ -18,22 +19,24 @@ int main()
     float32 gravity_factor = 0.f;
     b2World world(gravity);
     
-    //walls.push_back({ {0, 300},  {600, 25}, b2sb, world });
-    walls.push_back({ {0, -300}, {1000, 25}, b2sb, world });
-    //walls.push_back({ {300, 0},  {25, 600}, b2sb, world });
-    //walls.push_back({ {-300, 0}, {25, 600}, b2sb, world });
+    //walls.push_back({ {0, 300},  {600, 50}, b2sb, world });
+    walls.push_back({ {0, -300}, {1000, 100}, b2sb, world });
+    //walls.push_back({ {300, 0},  {50, 600}, b2sb, world });
+    //walls.push_back({ {-300, 0}, {50, 600}, b2sb, world });
 
     B2ObjectPlayerMrKoc playerMrKoc({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
-    B2ObjectBox body_A({ -50, 0 }, { 48,48 }, b2db, world);
-    B2ObjectElasticRope rope({ 0,0 }, { 10.f, 10.f }, b2db, playerMrKoc.body, body_A.body, 36, world);
-    B2ObjectFanBlower fan1({ 300,0 }, { 150, 25 }, b2kb, world, 180.f);
-    B2ObjectFanBlower fan2({ -300,0 }, { 150, 25 }, b2kb, world, -180.f);
+    B2ObjectBox rope_end({ -50, 0 }, { 48,48 }, b2db, world);
+    B2ObjectElasticRope rope({ 0,0 }, { 10.f, 10.f }, b2db, playerMrKoc.body, rope_end.body, 36, world);
+    std::vector<B2ObjectFanBlower> vec_fan;
+    vec_fan.push_back(B2ObjectFanBlower({ 300,0 }, { 150, 25 }, b2kb, world, 180.f));
+    vec_fan.push_back(B2ObjectFanBlower({ -300,0 }, { 150, 25 }, b2kb, world, 180.f));
+    TEXTURE("box")->setRepeated(true);
 
     while (System::window->isOpen()) 
     {
         System::Update();
         gravity_factor += System::time_elapsed;
-       // world.SetGravity({ gravity.x * std::cosf(gravity_factor), gravity.y * std::sinf(gravity_factor) });
+        world.SetGravity({ gravity.x * std::cosf(gravity_factor), gravity.y * std::sinf(gravity_factor) });
         System::window->setView(*System::camera);
         world.Step(System::time_elapsed, 1, 1);
         while (System::window->pollEvent(*System::event))
@@ -43,9 +46,12 @@ int main()
 
             if (Input::Mouse::Pressed(sf::Mouse::Left))
             {
-                sf::Vector2f size({ 15.f + rand() % 40 }, { 15.f + rand() % 40 });
-                boxes.push_back({ System::cursor_world, size, b2db, world });
+                const int random = rand() % 40;
+                boxes.push_back({ System::cursor_world, {65.f + random ,65.f + random}, b2db, world });
             }
+            if (Input::Mouse::Pressed(sf::Mouse::Right))
+                vec_fan.push_back(B2ObjectFanBlower(System::cursor_world, { 150, 25 }, b2kb, world, 180.f));
+
             playerMrKoc.Action();
         }
 
@@ -54,11 +60,11 @@ int main()
         for (auto& box : boxes)
         {
             box.Update(world);
-            box.Render(TEXTURE("test"));
+            box.Render(TEXTURE("extra"));
         }
 
-        fan1.Update(world);
-        fan2.Update(world);
+        for (auto& fan : vec_fan)
+            fan.Update(world);
 
         static sf::Color color(255,255,255);
         for (b2Contact* contact = world.GetContactList(); contact; contact = contact->GetNext())
@@ -76,13 +82,14 @@ int main()
         if (color.b < 255) color.b++;
         playerMrKoc.shape.setFillColor(color);
         playerMrKoc.Update(world);
-        fan1.Render(TEXTURE("fan"));
-        fan2.Render(TEXTURE("fan"));
+        for (auto& fan : vec_fan)
+            fan.Render(TEXTURE("fan"));
         playerMrKoc.Render();
         rope.Update(world);
+
         for (auto& wall : walls)
-            wall.Render();
-        body_A.Render();
+            wall.Render(TEXTURE("izumbox"));
+        rope_end.Render(TEXTURE("box"));
         rope.Render(TEXTURE("ball"));
 
         System::window->display();

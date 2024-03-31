@@ -4,8 +4,6 @@
 B2ObjectPlayerMrVol::B2ObjectPlayerMrVol(B2OBJECT_ARGS, b2World& world, sf::Texture* texture) : B2ObjectPlayer(position, size, type, world, texture)
 {
 	// why?
-	//sss
-
 }
 
 void B2ObjectPlayerMrVol::Action()

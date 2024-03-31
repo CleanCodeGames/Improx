@@ -136,6 +136,7 @@
     <ClCompile Include="Gameplay\B2Objects\B2ObjectFanBlower.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayerMrEsc.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayerMrKoc.cpp" />
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayerMrVol.cpp" />
     <ClCompile Include="Gameplay\Game.cpp" />
     <ClCompile Include="Gameplay\Levels\oLevel.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2Object.cpp" />

@@ -19,7 +19,8 @@
 * ∙
 * B2ObjectPlayer		: B2Object			// Игрок без реализации
 * B2ObjectPlayerMrKoc	: B2ObjectPlayer	// MrKoc
-* B2ObjectPlayerMrEsc	: B2ObjectPlayer	// MrEscow
+* B2ObjectPlayerMrEsc	: B2ObjectPlayer	// MrEsc
+* B2ObjectPlayerMrVol	: B2ObjectPlayer	// MrVol
 */
 
 CLASSDECL(B2Object,
@@ -46,6 +47,14 @@ public:
 CLASSDECL_INHERITANCE(B2ObjectPlayerMrEsc, B2ObjectPlayer,
 public:
 	B2OBJECT_DECL_ADDITION(B2ObjectPlayerMrEsc, b2World& world, sf::Texture* texture = nullptr)
+		sf::RectangleShape shape;
+	sf::Texture* texture;
+	void Action();
+	)
+
+	CLASSDECL_INHERITANCE(B2ObjectPlayerMrVol, B2ObjectPlayer,
+public:
+	B2OBJECT_DECL_ADDITION(B2ObjectPlayerMrVol, b2World& world, sf::Texture* texture = nullptr)
 		sf::RectangleShape shape;
 	sf::Texture* texture;
 	void Action();
