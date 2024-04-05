@@ -1,6 +1,6 @@
 #include "WorldSettings.h"
 
-WorldSettings::WorldSettings()
+WorldSettings::WorldSettings(const b2Vec2 gravity, const std::string& weather)
 {
 
 }

@@ -27,6 +27,7 @@ int main()
     B2ObjectPlayerMrKoc playerMrKoc({ 0.f, 0.f }, { 125.f, 125.f }, b2db, world, TEXTURE("qqq"));
     B2ObjectBox rope_end({ -50, 0 }, { 48,48 }, b2db, world);
     B2ObjectElasticRope rope({ 0,0 }, { 10.f, 10.f }, b2db, playerMrKoc.body, rope_end.body, 36, world);
+    B2ObjectSingleDoor door({ 500, 0 }, { 50, 350 }, b2sb, world, false);
     std::vector<B2ObjectFanBlower> vec_fan;
     vec_fan.push_back(B2ObjectFanBlower({ 300,0 }, { 150, 25 }, b2kb, world, 180.f));
     vec_fan.push_back(B2ObjectFanBlower({ -300,0 }, { 150, 25 }, b2kb, world, -180.f));
@@ -91,6 +92,9 @@ int main()
             wall.Render(TEXTURE("greenbox"));
         rope_end.Render(TEXTURE("box"));
         rope.Render(TEXTURE("ball"));
+
+        door.Update(world);
+        door.Render(TEXTURE("fan"));
 
         System::window->display();
     }

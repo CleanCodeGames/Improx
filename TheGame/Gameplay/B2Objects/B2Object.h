@@ -8,19 +8,22 @@
 
 /* 
 * * * * * * B2Object * * * * * * *	
-* 
+∙
 * B2ObjectBox			: B2Object	// Твёрдый ящик
 * B2ObjectCircle		: B2Object	// Твёрдый круг
-* B2ObjectChain			: B2Object	// Привязка обхектов (нереализовано)
+* B2ObjectChain			: B2Object	// Привязка объектов (нереализовано)
 * B2ObjectElasticRope	: B2Object	// Верёвка
 * B2ObjectFanBlower		: B2Object	// Вентелятор
-* ∙
+* B2ObjectSingleDoor	: B2Object	// Одинарная обыкновенная дверь
+* B2ObjectDoubleDoor	: B2Object	// Двойная обыкновенная дверь
+∙
 * * * * * B2ObjectPlayer * * * * *
-* ∙
+∙
 * B2ObjectPlayer		: B2Object			// Игрок без реализации
 * B2ObjectPlayerMrKoc	: B2ObjectPlayer	// MrKoc
 * B2ObjectPlayerMrEsc	: B2ObjectPlayer	// MrEsc
 * B2ObjectPlayerMrVol	: B2ObjectPlayer	// MrVol
+∙
 */
 
 CLASSDECL(B2Object,
@@ -93,4 +96,22 @@ public:
 	std::vector<B2ObjectBox> vec_boxes;
 	const float angular_velocity;
 	B2OBJECT_DECL_ADDITION(B2ObjectFanBlower, b2World& world, float32 angular_velocity)
+)
+
+CLASSDECL_INHERITANCE(B2ObjectSingleDoor, B2Object,
+	public:
+		bool is_open;
+		void Close();
+		void Open();
+		B2ObjectBox box_door;
+		B2OBJECT_DECL_ADDITION(B2ObjectSingleDoor, b2World& world, bool is_open = false)
+)
+
+CLASSDECL_INHERITANCE(B2ObjectDoubleDoor, B2Object,
+public:
+	bool is_open;
+	void Close();
+	void Open();
+	B2ObjectBox box_doors[2];
+	B2OBJECT_DECL_ADDITION(B2ObjectDoubleDoor, b2World& world, bool is_open = false)
 )
