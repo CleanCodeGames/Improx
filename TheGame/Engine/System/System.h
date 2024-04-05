@@ -23,6 +23,15 @@ public:
 	~System() = delete;
 )
 
+class IOpenClose
+{
+	bool is_open = false;
+public:
+	IOpenClose(bool is_open);
+	virtual void Open();
+	virtual void Close();
+};
+
 #define TEXTURE(file_name) System::resources->texture.Get(file_name)
 #define SOUND(file_name) System::resources->audio.sound.GetSound(file_name)
 #define SOUND_BUFFER(file_name) System::resources->audio.sound.GetBuffer(file_name)

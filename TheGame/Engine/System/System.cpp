@@ -39,3 +39,7 @@ void System::Update()
 	cursor_world = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 	cursor_window = sf::Vector2f(sf::Mouse::getPosition(*window));
 }
+
+IOpenClose::IOpenClose(bool is_open) : is_open(is_open) {}
+void IOpenClose::Open() { is_open = true; }
+void IOpenClose::Close() { is_open = false; }
