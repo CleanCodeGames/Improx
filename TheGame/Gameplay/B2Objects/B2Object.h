@@ -115,3 +115,14 @@ public:
 	B2ObjectBox box_doors[2];
 	B2OBJECT_DECL_ADDITION(B2ObjectDoubleDoor, b2World& world, bool is_open = false)
 )
+
+CLASSDECL_INHERITANCE(B2ObjectEnemyWeaponStoneHand, B2Object,
+public:
+	B2OBJECT_DECL_ADDITION(B2ObjectEnemyWeaponStoneHand, b2World& world)
+)
+
+CLASSDECL_INHERITANCE(B2ObjectEnemyStoneGiant, B2Object,
+public:
+	B2ObjectEnemyWeaponStoneHand weapon[2];
+	B2OBJECT_DECL_ADDITION(B2ObjectEnemyStoneGiant, b2World& world)
+)

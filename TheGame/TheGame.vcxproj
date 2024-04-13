@@ -134,6 +134,8 @@
     <ClCompile Include="Gameplay\B2Objects\B2ObjectCircle.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectDoubleDoor.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectElasticRope.cpp" />
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectEnemyStoneGiant.cpp" />
+    <ClCompile Include="Gameplay\B2Objects\B2ObjectEnemyWeaponStoneHand.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectFanBlower.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayerMrEsc.cpp" />
     <ClCompile Include="Gameplay\B2Objects\B2ObjectPlayerMrKoc.cpp" />
